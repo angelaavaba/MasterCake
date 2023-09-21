@@ -10,6 +10,7 @@ sealed class Destinations (
     val icon:  ImageVector
     ){
 
+    //Destinos
     object HomeView: Destinations("HomeView","Home", Icons.Filled.Home)
     object FavoritesView: Destinations("FavoritesView","Favorites", Icons.Filled.Favorite)
     object MessagesView: Destinations("MessagesView","Messages", Icons.Filled.Message)
