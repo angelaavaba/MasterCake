@@ -18,16 +18,5 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeView(){
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Icon(
-            imageVector = Icons.Filled.MobileFriendly,
-            contentDescription = "",
-            tint = Color.Black,
-            modifier = Modifier.size(150.dp)
-                .align(Alignment.Center)
 
-        )
-    }
 }
