@@ -5,6 +5,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.MobileFriendly
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +22,7 @@ fun HomeView(){
         modifier = Modifier.fillMaxSize()
     ) {
         Icon(
-            imageVector = Icons.Filled.Home,
+            imageVector = Icons.Filled.MobileFriendly,
             contentDescription = "",
             tint = Color.Black,
             modifier = Modifier.size(150.dp)
