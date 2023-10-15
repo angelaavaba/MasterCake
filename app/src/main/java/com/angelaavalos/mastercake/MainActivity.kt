@@ -13,10 +13,26 @@ import com.angelaavalos.mastercake.navigation.NavigationHost
 
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            val navController = rememberNavController()
+
+            val navigationItems = listOf(
+                Destinations.HomeView,
+                Destinations.FavoritesView,
+                Destinations.MessagesView,
+                Destinations.CartView
+            )
+            Scaffold(
+                bottomBar = {
+                    BottomNavBar(navController = navController, items = navigationItems)
+                }
+            ) {
+                NavigationHost(navController)
+
+            }
 
         }
     }
