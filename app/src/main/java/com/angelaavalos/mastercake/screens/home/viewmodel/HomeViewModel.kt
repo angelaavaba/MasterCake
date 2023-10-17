@@ -1,14 +1,15 @@
-package com.angelaavalos.mastercake.screens.home
+package com.angelaavalos.mastercake.screens.home.viewmodel
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import com.angelaavalos.mastercake.R
+import com.angelaavalos.mastercake.screens.home.models.Product
 
 class HomeViewModel : ViewModel(){
 
-    data class Product(val image: Int, val name: String, val price: Double, val description: String)
+
     data class Categories(val icon: ImageVector, val name: String)
 
 

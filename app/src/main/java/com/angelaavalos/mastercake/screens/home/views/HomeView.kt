@@ -3,11 +3,11 @@ package com.angelaavalos.mastercake.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -24,14 +24,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.angelaavalos.mastercake.screens.home.HomeViewModel
+import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
+import com.angelaavalos.mastercake.screens.home.ProductsItem
+import com.angelaavalos.mastercake.screens.home.models.Product
+import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
 
 @Composable
 fun HomeView(homeViewModel: HomeViewModel) {
 
-    val selectedProduct = remember { mutableStateOf(null as HomeViewModel.Product?) }
-
+    val selectedProduct = remember { mutableStateOf(null as Product?) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
@@ -65,46 +67,12 @@ fun HomeView(homeViewModel: HomeViewModel) {
     selectedProduct.value?.let { product ->
         ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null })
     }
+
 }
 
-@Composable
-fun ProductsItem(product: HomeViewModel.Product, onProductClick: ()->Unit) {
-    Card(
-        modifier = Modifier
-            .width(180.dp)
-            .clickable { onProductClick() }
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Image(
-                painter = painterResource(id = product.image),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(shape = MaterialTheme.shapes.medium)
-            )
-            Text(
-                text = product.name,
-                style = MaterialTheme.typography.h5,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
-            Text(
-                text = product.price.toString() + "MXN",
-                style = MaterialTheme.typography.h6,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
-        }
 
-    }
-}
 @Composable
-fun ProductDescriptionDialog(product: HomeViewModel.Product, onDismiss: () -> Unit) {
+fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = true)
@@ -154,13 +122,20 @@ fun ProductDescriptionDialog(product: HomeViewModel.Product, onDismiss: () -> Un
     }
 }
 
+
+
 @Composable
 fun CategoriesItem(category: HomeViewModel.Categories) {
+
+    MASTERCAKETheme() {
+
+
+
     Card(
         modifier = Modifier
             .width(100.dp)
             .padding(8.dp)
-            .border(1.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.small)
+            .border(1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(20.dp))
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
@@ -188,6 +163,7 @@ fun CategoriesItem(category: HomeViewModel.Categories) {
 
         }
 
+    }
     }
 }
 
