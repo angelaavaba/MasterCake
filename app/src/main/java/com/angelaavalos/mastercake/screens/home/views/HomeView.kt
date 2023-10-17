@@ -2,7 +2,6 @@ package com.angelaavalos.mastercake.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -26,7 +25,9 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.home.ProductsItem
+import com.angelaavalos.mastercake.screens.home.models.Categories
 import com.angelaavalos.mastercake.screens.home.models.Product
+import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
 
@@ -124,47 +125,5 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
 
 
 
-@Composable
-fun CategoriesItem(category: HomeViewModel.Categories) {
-
-    MASTERCAKETheme() {
-
-
-
-    Card(
-        modifier = Modifier
-            .width(100.dp)
-            .padding(8.dp)
-            .border(1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(20.dp))
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Icon(
-                imageVector = category.icon,
-                contentDescription = null,
-                tint = MaterialTheme.colors.primary,
-                modifier = Modifier
-                    .size(100.dp)
-                    .fillMaxWidth()
-                    .clip(shape = MaterialTheme.shapes.small)
-
-
-
-            )
-            Text(
-                text = category.name,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                color = MaterialTheme.colors.primary,
-                textAlign = TextAlign.Center
-            )
-
-        }
-
-    }
-    }
-}
 
 
