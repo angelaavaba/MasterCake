@@ -6,6 +6,7 @@ import android.widget.DatePicker
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -47,17 +48,19 @@ fun CalendarView(){
         }, mYear, mMonth, mDay
     )
 
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    Button(
+        onClick = { mDatePickerDialog.show() },
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondaryVariant),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+    ) {
+        Text(text = if (mDate.value.isNotBlank()) mDate.value else "Calendario")
     }
-    Button(onClick = {
-        mDatePickerDialog.show()
-    }, colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF0F9D58)) ) {
-        Text(text = "Open Date Picker", color = Color.White)
-    }
-    Spacer(modifier = Modifier.size(100.dp))
 
-    // Displaying the mDate value in the Text
-    Text(text = "${mDate.value}", fontSize = 30.sp, textAlign = TextAlign.Center)
+
+
+
 }
 
 

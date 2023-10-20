@@ -28,7 +28,7 @@ fun LogInView() {
             .fillMaxSize()
             .background(color = MaterialTheme.colors.secondary)
 
-    ) {
+    ){
         Image(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "",
@@ -46,13 +46,10 @@ fun LogInView() {
             shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
             border = BorderStroke(1.dp, Color.White)
         ) {
-
             Column(
                 modifier = Modifier
                     .padding(30.dp),
-                verticalArrangement = Arrangement.SpaceAround,
-
-                ) {
+                verticalArrangement = Arrangement.SpaceAround) {
                 Text(
                     text = "Ingresar",
                     style = TextStyle(
