@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.components.BottomNavBar
 import com.angelaavalos.mastercake.navigation.Destinations
 import com.angelaavalos.mastercake.navigation.NavigationHost
+import com.angelaavalos.mastercake.screens.utils.CalendarView
 
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     BottomNavBar(navController = navController, items = navigationItems)
                 }
             ) {
-                NavigationHost(navController)
+              //  NavigationHost(navController)
+                CalendarView()
 
             }
 
