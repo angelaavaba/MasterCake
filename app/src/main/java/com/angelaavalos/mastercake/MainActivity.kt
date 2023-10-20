@@ -6,13 +6,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.components.BottomNavBar
 import com.angelaavalos.mastercake.navigation.Destinations
 import com.angelaavalos.mastercake.navigation.NavigationHost
+import com.angelaavalos.mastercake.screens.onboarding.OnboardingPreview
+import com.google.accompanist.pager.ExperimentalPagerApi
 
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalPagerApi::class)
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +34,10 @@ class MainActivity : ComponentActivity() {
                     BottomNavBar(navController = navController, items = navigationItems)
                 }
             ) {
-                NavigationHost(navController)
-
+                //  NavigationHost(navController)
+                OnboardingPreview()
             }
+
 
         }
     }
@@ -40,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen(){
+fun MainScreen() {
     val navController = rememberNavController()
 
     val navigationItems = listOf(
@@ -50,8 +55,16 @@ fun MainScreen(){
         Destinations.CartView
     )
     Scaffold(
-        bottomBar = { BottomNavBar(navController = navController, items = navigationItems)}
-    ){
-        NavigationHost(navController)
+        bottomBar = { BottomNavBar(navController = navController, items = navigationItems) }
+    ) {
+        //NavigationHost(navController)
     }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    OnboardingPreview()
+
 }
