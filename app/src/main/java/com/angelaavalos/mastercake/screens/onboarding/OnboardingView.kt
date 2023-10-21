@@ -6,13 +6,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.BottomEnd
+
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -94,7 +94,7 @@ fun OnBoardingPager(
             modifier = Modifier.fillMaxSize()
         )
 
-        Spacer(modifier = Modifier.height(200.dp)) // <-- Aumentamos aún más la altura del Spacer
+        Spacer(modifier = Modifier.height(500.dp)) // <-- Aumentamos aún más la altura del Spacer
 
         Column(
             modifier = Modifier
@@ -128,7 +128,7 @@ fun OnBoardingPager(
 fun PagerIndicator(size: Int, currentPage: Int) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.padding(top = 60.dp)
+        modifier = Modifier.padding(top = 10.dp)
     ) {
         repeat(size) {
             Indicator(isSelected = it == currentPage)
