@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Surface
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.angelaavalos.mastercake.components.BottomNavBar
-import com.angelaavalos.mastercake.navigation.Destinations
 import com.angelaavalos.mastercake.navigation.NavigationHost
-import com.angelaavalos.mastercake.screens.utils.CalendarView
+
+
 
 
 class MainActivity : ComponentActivity() {
@@ -20,40 +20,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            val navigationItems = listOf(
-                Destinations.HomeView,
-                Destinations.FavoritesView,
-                Destinations.MessagesView,
-                Destinations.CartView
-            )
-            Scaffold(
-                bottomBar = {
-                    BottomNavBar(navController = navController, items = navigationItems)
-                }
+            Surface(modifier = Modifier.fillMaxSize()
             ) {
-              //  NavigationHost(navController)
-                CalendarView()
-
+                NavigationHost(navController = navController)
             }
 
         }
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Composable
-fun MainScreen(){
-    val navController = rememberNavController()
 
-    val navigationItems = listOf(
-        Destinations.HomeView,
-        Destinations.FavoritesView,
-        Destinations.MessagesView,
-        Destinations.CartView
-    )
-    Scaffold(
-        bottomBar = { BottomNavBar(navController = navController, items = navigationItems)}
-    ){
-        NavigationHost(navController)
-    }
-}

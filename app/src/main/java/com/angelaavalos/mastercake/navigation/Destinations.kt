@@ -1,18 +1,12 @@
 package com.angelaavalos.mastercake.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.ui.graphics.vector.ImageVector
 
-sealed class Destinations (
-    val route: String,
-    val title: String,
-    val icon:  ImageVector
-    ){
+sealed class Destinations (val route:String)
+   {
+       //Destinos
+    object HomeView: Destinations("HomeView")
+    object FavoritesView: Destinations("FavoritesView")
+    object MessagesView: Destinations("MessagesView")
+    object CartView: Destinations("CartView")
 
-    //Destinos
-    object HomeView: Destinations("HomeView","Home", Icons.Filled.Home)
-    object FavoritesView: Destinations("FavoritesView","Favorites", Icons.Filled.Favorite)
-    object MessagesView: Destinations("MessagesView","Messages", Icons.Filled.Message)
-    object CartView: Destinations("CartView","Cart", Icons.Filled.ShoppingCart)
 }

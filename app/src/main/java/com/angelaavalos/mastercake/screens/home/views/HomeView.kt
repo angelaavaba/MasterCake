@@ -20,9 +20,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.angelaavalos.mastercake.navigation.Destinations
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.home.ProductsItem
 import com.angelaavalos.mastercake.screens.home.models.Categories
@@ -32,7 +36,7 @@ import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
 
 @Composable
-fun HomeView(homeViewModel: HomeViewModel) {
+fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
 
     val selectedProduct = remember { mutableStateOf(null as Product?) }
 
@@ -124,6 +128,11 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
 }
 
 
-
+@Composable
+@Preview
+fun HomeViewPreview(){
+    val navController = rememberNavController()
+    HomeView(homeViewModel = HomeViewModel(), navController = navController)
+}
 
 

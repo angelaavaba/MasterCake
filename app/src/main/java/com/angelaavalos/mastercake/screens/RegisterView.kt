@@ -1,6 +1,5 @@
 package com.angelaavalos.mastercake.screens
 
-
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,11 +21,17 @@ import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.angelaavalos.mastercake.navigation.Destinations
 import com.angelaavalos.mastercake.screens.utils.CalendarView
+import com.angelaavalos.mastercake.screens.utils.DropDownMenu
+import androidx.compose.material3.ExperimentalMaterial3Api
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterView(){
+fun RegisterView(navController:NavController) {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -37,13 +42,13 @@ fun RegisterView(){
             contentDescription = "",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(150.dp)
                 .align(Alignment.TopCenter)
         )
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.8f)
+                .fillMaxHeight(0.83f)
                 .padding(top = 10.dp)
                 .align(Alignment.BottomEnd),
             shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
@@ -51,12 +56,12 @@ fun RegisterView(){
         ) {
             Column(
                 modifier = Modifier
-                    .padding(30.dp),
+                    .padding(top = 5.dp, end = 30.dp, start = 30.dp, bottom = 5.dp ),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
 
                 Text(
-                    text = "Registar",
+                    text = "Registrar",
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 20.sp,
@@ -79,7 +84,7 @@ fun RegisterView(){
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
                             .fillMaxWidth(),
-                            //.padding(bottom = 20.dp),
+                        //.padding(bottom = 20.dp),
                         shape = RoundedCornerShape(10.dp),
                         colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
 
@@ -102,14 +107,46 @@ fun RegisterView(){
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
                             .fillMaxWidth(),
-                            //.padding(bottom = 20.dp),
+                        //.padding(bottom = 20.dp),
                         shape = RoundedCornerShape(10.dp),
                         colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
 
                     )
-
+                    Text(
+                        text = "Domicilio",
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    TextField(
+                        value = "",
+                        onValueChange = {},
+                        label = { Text(text = "Calle. Numero.") },
+                        textStyle = TextStyle(color = Color.White),
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
+                    )
                     Row(
                         verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Genero",
+                            style = TextStyle(
+                                color = Color.Black,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                        Spacer(modifier = Modifier.size(20.dp))
+                        DropDownMenu()
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
                     ) {
                         Text(
                             text = "Fecha de Nacimiento",
@@ -122,26 +159,22 @@ fun RegisterView(){
                         Spacer(modifier = Modifier.size(20.dp))
                         CalendarView()
                     }
-                    Text(
-                        text = "Domicilio",
-                        style = TextStyle(
-                            color = Color.Black,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                        TextField(
-                            value = "",
-                            onValueChange = {},
-                            label = { Text(text = "Calle. Numero.") },
-                            textStyle = TextStyle(color = Color.White),
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            shape = RoundedCornerShape(10.dp),
-                            colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
-                        )
 
                 }
+                    Button(
+                        onClick = { navController.navigate(route = "HomeView") },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+
+
+                    ) {
+                        Text(text = "Register")
+                    }
+
+
+
 
             }
         }
@@ -151,5 +184,10 @@ fun RegisterView(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview3(){
-    RegisterView()
+
+    val navController = rememberNavController()
+
+    // Aquí proporciona el navController a RegisterView
+    RegisterView(navController = navController)
+
 }

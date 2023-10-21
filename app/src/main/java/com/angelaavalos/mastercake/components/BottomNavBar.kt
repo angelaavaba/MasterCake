@@ -6,6 +6,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -13,39 +14,38 @@ import com.angelaavalos.mastercake.navigation.Destinations
 
 
 @Composable
-fun BottomNavBar(
-    navController: NavController,
-    items: List<Destinations>
-){
-    val currentRoute = currentRoute(navController)
+fun BottomNavBar(navController: NavController, modifier: Modifier){
+    BottomNavigation {
+        val backStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = backStackEntry?.destination?.route
 
-    BottomNavigation() {
-        items.forEach{ screen ->
+        NavBarItems.NavBarItems.forEach { navItem ->
             BottomNavigationItem(
-                icon = { Icon(imageVector = screen.icon, contentDescription = screen.title) },
-                label = { Text(screen.title)},
-                selected = currentRoute == screen.route,
+                selected = currentRoute == navItem.route,
                 onClick = {
-                    navController.navigate(screen.route){
-                        popUpTo(navController.graph.findStartDestination().id){
+                    navController.navigate(navItem.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
-
                         launchSingleTop = true
+                        restoreState = true
                     }
                 },
-                alwaysShowLabel = false
-
+                icon = {
+                    Icon(
+                        imageVector = navItem.image,
+                        contentDescription = null
+                    )
+                },
+                label = {
+                    Text("Test")
+                }
             )
+        }
+
 
 
         }
     }
-}
 
-@Composable
-private fun currentRoute(navController: NavController): String? {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    return navBackStackEntry?.destination?.route
 
-}
