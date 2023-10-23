@@ -23,12 +23,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.angelaavalos.mastercake.navigation.Destinations
 import com.angelaavalos.mastercake.screens.utils.CalendarView
 import com.angelaavalos.mastercake.screens.utils.DropDownMenu
-import androidx.compose.material3.ExperimentalMaterial3Api
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterView(navController:NavController) {
 
@@ -162,7 +159,7 @@ fun RegisterView(navController:NavController) {
 
                 }
                     Button(
-                        onClick = { navController.navigate(route = "HomeView") },
+                        onClick = { navController.navigate(route = "Home") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),

@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,16 +23,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.angelaavalos.mastercake.R
 
-
-
 @Composable
-fun HomeView() {
+fun LogInRegisterView() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Blue) // Fondo azul claro
+            .background(color = MaterialTheme.colors.secondary) // Fondo azul claro
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -46,24 +47,27 @@ fun HomeView() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(35.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = { /* Acción cuando se hace clic en Registrarse */ },
+                    onClick = {  },
                     modifier = Modifier
-                        .height(40.dp)
-                        .width(170.dp)
+                        .height(60.dp)
+                        .width(170.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                 ) {
-                    Text(text = "Ingresar")
+                    Text(text = "Ingresar", color = MaterialTheme.colors.secondary)
                 }
                 Button(
-                    onClick = { /* Acción cuando se hace clic en Ingresar */ },
+                    onClick = { },
                     modifier = Modifier
-                        .height(40.dp)
-                        .width(170.dp)
+                        .height(60.dp)
+                        .width(170.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
+
                 ) {
-                    Text(text = "Registrarse")
+                    Text(text = "Registrarse", color = MaterialTheme.colors.secondary)
                 }
             }
         }
@@ -73,5 +77,5 @@ fun HomeView() {
 @Preview
 @Composable
 fun HomePreview() {
-    HomeView()
+    LogInRegisterView()
 }
