@@ -31,6 +31,8 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
+data class OnBoardingData(val image: Int, val title: String, val desc: String)
+
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingView(navController: NavController) {
@@ -38,7 +40,7 @@ fun OnboardingView(navController: NavController) {
 
     items.add(
         OnBoardingData(
-            R.drawable.pastel3,
+            R.drawable.fondo,
             "DISFRUTA NUESTROS POSTRES",
             "los mejores del mundo"
         )
@@ -46,7 +48,7 @@ fun OnboardingView(navController: NavController) {
 
     items.add(
         OnBoardingData(
-            R.drawable.pastel2,
+            R.drawable.fondo,
             "DESAFIA TU PALADAR",
             "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface."
         )
@@ -54,7 +56,7 @@ fun OnboardingView(navController: NavController) {
 
     items.add(
         OnBoardingData(
-            R.drawable.pastel1,
+            R.drawable.fondo,
             "CONOCE NUESTRAS ESPECIALIDADES",
             "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface."
         )

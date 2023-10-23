@@ -1,51 +1,50 @@
 package com.angelaavalos.mastercake.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.angelaavalos.mastercake.navigation.Destinations
-
+import androidx.compose.ui.graphics.Color
 
 @Composable
-fun BottomNavBar(navController: NavController, modifier: Modifier){
-    BottomNavigation {
-        val backStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = backStackEntry?.destination?.route
-
-        NavBarItems.NavBarItems.forEach { navItem ->
-            BottomNavigationItem(
-                selected = currentRoute == navItem.route,
-                onClick = {
-                    navController.navigate(navItem.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-                icon = {
-                    Icon(
-                        imageVector = navItem.image,
-                        contentDescription = null
-                    )
-                },
-                label = {
-                    Text("Test")
-                }
-            )
-        }
-
-
-
-        }
+fun BottomNavBar() {
+    BottomNavigation(
+        modifier = Modifier.fillMaxWidth(),
+        backgroundColor = Color.White,
+        contentColor = Color.DarkGray
+    ) {
+        BottomNavigationItem(
+            icon = { Icon(Icons.Default.Home, contentDescription = null) },
+            label = { Text("Home") },
+            selected = true,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
+            label = { Text("Favoritos") },
+            selected = false,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = { Icon(Icons.Default.Notifications, contentDescription = null) },
+            label = { Text("Notificaciones") },
+            selected = false,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = { Icon(Icons.Default.ShoppingCart, contentDescription = null) },
+            label = { Text("Carrito de Compras") },
+            selected = false,
+            onClick = {}
+        )
     }
-
+}
 
