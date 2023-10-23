@@ -159,7 +159,7 @@ fun RegisterView(navController:NavController) {
 
                 }
                     Button(
-                        onClick = { navController.navigate(route = "Home") },
+                        onClick = { navController.navigate(route = "homeroute") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),

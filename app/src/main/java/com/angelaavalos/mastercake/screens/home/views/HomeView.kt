@@ -23,7 +23,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.angelaavalos.mastercake.components.BottomNavBar
+import com.angelaavalos.mastercake.navigation.components.BottomNavBar
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.home.ProductsItem
 import com.angelaavalos.mastercake.screens.home.models.Product
@@ -66,8 +66,8 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
         selectedProduct.value?.let { product ->
             ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null })
         }
-
-        BottomNavBar() // This should now appear at the bottom
+        val navController = rememberNavController()
+        BottomNavBar(navController = navController) // This should now appear at the bottom
     }
 }
 
@@ -132,7 +132,7 @@ fun HomeViewPreview(){
     val navController = rememberNavController()
 
     HomeView(homeViewModel = HomeViewModel(), navController = navController)
-    BottomNavBar()
+    BottomNavBar(navController = navController)
 
 }
 

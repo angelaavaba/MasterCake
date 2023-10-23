@@ -27,11 +27,8 @@ import androidx.navigation.NavController
 import com.angelaavalos.mastercake.R
 
 @Composable
-<<<<<<< HEAD
-fun LogInRegisterView () {
-=======
+
 fun LogInRegisterView() {
->>>>>>> 0b26eca6c6232e7de7dea3e35179d9b7a88315da
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -80,12 +77,8 @@ fun LogInRegisterView() {
 
 @Preview
 @Composable
-<<<<<<< HEAD
-fun LogInRegisterPreview() {
- LogInRegisterView()
 
-=======
-fun HomePreview() {
+fun LogInRegisterPreview() {
     LogInRegisterView()
->>>>>>> 0b26eca6c6232e7de7dea3e35179d9b7a88315da
+
 }

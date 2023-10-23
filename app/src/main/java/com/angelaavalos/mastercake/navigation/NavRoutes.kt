@@ -4,9 +4,9 @@ package com.angelaavalos.mastercake.navigation
 sealed class NavRoutes (val route:String)
    {
        //Destinos
-    object Home: NavRoutes("Home")
-    object FavoritesView: NavRoutes("FavoritesView")
-    object MessagesView: NavRoutes("MessagesView")
-    object CartView: NavRoutes("CartView")
+    object Home: NavRoutes("homeroute")
+    object FavoritesView: NavRoutes("favoritesroute")
+    object NotificationsView: NavRoutes("notificationsroute")
+    object CartView: NavRoutes("cartroute")
 
 }

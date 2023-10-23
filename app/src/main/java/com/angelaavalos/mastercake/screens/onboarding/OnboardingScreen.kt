@@ -15,11 +15,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -33,8 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.angelaavalos.mastercake.R
 import kotlinx.coroutines.launch
+import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
-@OptIn(ExperimentalFoundationApi::class)
+
+
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(){
     Surface(
@@ -56,11 +55,11 @@ fun OnboardingScreen(){
             painterResource(id = R.drawable.pastel2),
             painterResource(id = R.drawable.pastel3)
         )
-        val state = rememberPagerState()
+        val state = rememberPagerState(pageCount = { onboarding.size })
         val scope = rememberCoroutineScope()
 
         Box {
-            HorizontalPager(pageCount = onboarding.size, state = state) { page ->
+            HorizontalPager(state = state) { page ->
                 if (page == 0) {
                     // Primera página con el diseño original
                     Image(
@@ -108,10 +107,6 @@ fun OnboardingScreen(){
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxWidth(),
-                            shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
-
-
-
                         ) {
                             Column(
                                 modifier = Modifier
@@ -141,31 +136,40 @@ fun OnboardingScreen(){
             // Botones de navegación
             if (state.currentPage != onboarding.size - 1) {
                 Button(
-                    onClick = {
-                        scope.launch {
-                            state.animateScrollToPage(state.currentPage + 1)
-                        }
-                    },
-                    modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)
+                    onClick = { scope.launch { state.animateScrollToPage(state.currentPage + 1) } },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(16.dp),
+                    colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
                 ) {
                     Text(text = "Next")
                 }
-                Button(
-                    onClick = {
-                        scope.launch {
-                            state.animateScrollToPage(onboarding.size - 1)
-                        }
-                    },
-                    modifier = Modifier.align(Alignment.BottomStart).padding(16.dp)
-                ) {
-                    Text(text = "Skip")
+                MASTERCAKETheme() {
+
+                    Button(
+                        onClick = {
+                            scope.launch {
+                                state.animateScrollToPage(onboarding.size - 1)
+                            }
+                        },
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .padding(16.dp),
+                        colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
+
+                    ) {
+                        Text(text = "Skip")
+                    }
                 }
             } else {
                 Button(
                     onClick = {
                         // Acción cuando se presiona "Empezar"
                     },
-                    modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 50.dp)
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 50.dp),
+                    colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
                 ) {
                     Text(text = "Empezar")
                 }
@@ -179,7 +183,7 @@ fun OnboardingScreen(){
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 repeat(onboarding.size) {
-                    val color = if (state.currentPage == it) Color.Red else Color.Black
+                    val color = if (state.currentPage == it) Color.Black else Color.White
 
                     Box(
                         modifier = Modifier
