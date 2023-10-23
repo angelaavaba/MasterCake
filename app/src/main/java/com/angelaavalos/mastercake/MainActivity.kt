@@ -4,20 +4,23 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.components.BottomNavBar
 import com.angelaavalos.mastercake.navigation.Destinations
-import com.angelaavalos.mastercake.navigation.NavigationHost
-import com.angelaavalos.mastercake.screens.onboarding.OnboardingPreview
+import com.angelaavalos.mastercake.screens.onboarding.OnboardingScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalPagerApi::class)
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+    @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
+    @SuppressLint(
+        "UnusedMaterialScaffoldPaddingParameter",
+        "UnusedMaterial3ScaffoldPaddingParameter"
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -35,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 }
             ) {
                 //  NavigationHost(navController)
-                OnboardingPreview()
+                OnboardingScreen()
             }
 
 
@@ -43,7 +46,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
@@ -65,6 +69,6 @@ fun MainScreen() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    OnboardingPreview()
 
+    OnboardingScreen()
 }

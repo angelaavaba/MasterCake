@@ -26,7 +26,7 @@ import com.angelaavalos.mastercake.R
 
 
 @Composable
-fun HomeView() {
+fun LogInRegisterView () {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +38,7 @@ fun HomeView() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo),
+                painter = painterResource(id = R.drawable.logo2),
                 contentDescription = "Imagen del logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth()
@@ -72,6 +72,7 @@ fun HomeView() {
 
 @Preview
 @Composable
-fun HomePreview() {
-    HomeView()
+fun LogInRegisterPreview() {
+ LogInRegisterView()
+
 }

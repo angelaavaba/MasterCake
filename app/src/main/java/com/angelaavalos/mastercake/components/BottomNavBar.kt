@@ -1,15 +1,16 @@
 package com.angelaavalos.mastercake.components
 
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import android.graphics.drawable.Icon
+
+
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.angelaavalos.mastercake.navigation.Destinations
+
 
 
 @Composable
@@ -23,7 +24,7 @@ fun BottomNavBar(
         items.forEach{ screen ->
             BottomNavigationItem(
                 icon = { Icon(imageVector = screen.icon, contentDescription = screen.title) },
-                label = { Text(screen.title)},
+                label = { Text(screen.title) },
                 selected = currentRoute == screen.route,
                 onClick = {
                     navController.navigate(screen.route){
