@@ -27,7 +27,11 @@ import androidx.navigation.NavController
 import com.angelaavalos.mastercake.R
 
 @Composable
+<<<<<<< HEAD
+fun LogInRegisterView () {
+=======
 fun LogInRegisterView() {
+>>>>>>> 0b26eca6c6232e7de7dea3e35179d9b7a88315da
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -39,7 +43,7 @@ fun LogInRegisterView() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo),
+                painter = painterResource(id = R.drawable.logo2),
                 contentDescription = "Imagen del logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth()
@@ -76,6 +80,12 @@ fun LogInRegisterView() {
 
 @Preview
 @Composable
+<<<<<<< HEAD
+fun LogInRegisterPreview() {
+ LogInRegisterView()
+
+=======
 fun HomePreview() {
     LogInRegisterView()
+>>>>>>> 0b26eca6c6232e7de7dea3e35179d9b7a88315da
 }

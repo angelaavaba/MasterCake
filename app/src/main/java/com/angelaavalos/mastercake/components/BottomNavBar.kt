@@ -1,5 +1,11 @@
 package com.angelaavalos.mastercake.components
 
+<<<<<<< HEAD
+import android.graphics.drawable.Icon
+
+
+
+=======
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -10,11 +16,42 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
+>>>>>>> 0b26eca6c6232e7de7dea3e35179d9b7a88315da
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
+
 @Composable
+<<<<<<< HEAD
+fun BottomNavBar(
+    navController: NavController,
+    items: List<Destinations>
+){
+    val currentRoute = currentRoute(navController)
+
+    BottomNavigation() {
+        items.forEach{ screen ->
+            BottomNavigationItem(
+                icon = { Icon(imageVector = screen.icon, contentDescription = screen.title) },
+                label = { Text(screen.title) },
+                selected = currentRoute == screen.route,
+                onClick = {
+                    navController.navigate(screen.route){
+                        popUpTo(navController.graph.findStartDestination().id){
+                            saveState = true
+                        }
+
+                        launchSingleTop = true
+                    }
+                },
+                alwaysShowLabel = false
+
+            )
+
+
+        }
+=======
 fun BottomNavBar() {
     BottomNavigation(
         modifier = Modifier.fillMaxWidth(),
@@ -45,6 +82,7 @@ fun BottomNavBar() {
             selected = false,
             onClick = {}
         )
+>>>>>>> 0b26eca6c6232e7de7dea3e35179d9b7a88315da
     }
 }
 
