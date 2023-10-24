@@ -27,7 +27,8 @@ import com.angelaavalos.mastercake.screens.utils.CalendarView
 import com.angelaavalos.mastercake.screens.utils.DropDownMenu
 
 @Composable
-fun RegisterView(navController:NavController) {
+fun RegisterView() {
+val navController = rememberNavController()
 
     Box(
         modifier = Modifier
@@ -159,7 +160,7 @@ fun RegisterView(navController:NavController) {
 
                 }
                     Button(
-                        onClick = { navController.navigate(route = "homeroute") },
+                        onClick = { navController.navigate(route = "onboardingroute") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
@@ -185,6 +186,6 @@ fun DefaultPreview3(){
     val navController = rememberNavController()
 
     // Aquí proporciona el navController a RegisterView
-    RegisterView(navController = navController)
+    RegisterView()
 
 }

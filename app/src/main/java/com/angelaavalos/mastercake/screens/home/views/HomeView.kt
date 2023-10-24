@@ -23,7 +23,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.angelaavalos.mastercake.navigation.components.BottomNavBar
+import com.angelaavalos.mastercake.BottomNavBar
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.home.ProductsItem
 import com.angelaavalos.mastercake.screens.home.models.Product
@@ -31,7 +31,7 @@ import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 
 
 @Composable
-fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
+fun HomeView(homeViewModel: HomeViewModel) {
     val selectedProduct = remember { mutableStateOf(null as Product?) }
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -66,15 +66,15 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
         selectedProduct.value?.let { product ->
             ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null })
         }
-        val navController = rememberNavController()
-        BottomNavBar(navController = navController) // This should now appear at the bottom
+
+
     }
 }
 
 
 @Composable
 fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
-    val navController = rememberNavController()
+    
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = true)
@@ -131,7 +131,7 @@ fun HomeViewPreview(){
 
     val navController = rememberNavController()
 
-    HomeView(homeViewModel = HomeViewModel(), navController = navController)
+    HomeView(homeViewModel = HomeViewModel())
     BottomNavBar(navController = navController)
 
 }

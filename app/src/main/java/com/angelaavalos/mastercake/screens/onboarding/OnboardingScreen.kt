@@ -27,15 +27,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.R
 import kotlinx.coroutines.launch
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
 
-
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(){
+    val navController = rememberNavController()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -164,8 +166,8 @@ fun OnboardingScreen(){
             } else {
                 Button(
                     onClick = {
-                        // Acción cuando se presiona "Empezar"
-                    },
+                              navController.navigate("prueba")
+                              },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(bottom = 50.dp),
