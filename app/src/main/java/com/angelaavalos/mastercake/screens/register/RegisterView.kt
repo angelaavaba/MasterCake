@@ -1,4 +1,4 @@
-package com.angelaavalos.mastercake.screens
+package com.angelaavalos.mastercake.screens.register
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -27,8 +27,7 @@ import com.angelaavalos.mastercake.screens.utils.CalendarView
 import com.angelaavalos.mastercake.screens.utils.DropDownMenu
 
 @Composable
-fun RegisterView() {
-val navController = rememberNavController()
+fun RegisterView(navController: NavController) {
 
     Box(
         modifier = Modifier
@@ -160,7 +159,7 @@ val navController = rememberNavController()
 
                 }
                     Button(
-                        onClick = { navController.navigate(route = "onboardingroute") },
+                        onClick = { navController.navigate(route = "homeroute") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
@@ -186,6 +185,6 @@ fun DefaultPreview3(){
     val navController = rememberNavController()
 
     // Aquí proporciona el navController a RegisterView
-    RegisterView()
+    RegisterView(navController = navController)
 
 }
