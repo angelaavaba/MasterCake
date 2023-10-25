@@ -1,4 +1,4 @@
-package com.angelaavalos.mastercake.screens.onboarding
+package com.angelaavalos.mastercake.screens.loginregister
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,11 +24,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.R
+import com.angelaavalos.mastercake.navigation.NavRoutes
 
 @Composable
 
-fun LogInRegisterView() {
+fun LogInRegisterView(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -52,7 +54,10 @@ fun LogInRegisterView() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {  },
+                    onClick = {
+                        navController.popBackStack()
+                        navController.navigate(NavRoutes.LoginView.route)
+                    },
                     modifier = Modifier
                         .height(60.dp)
                         .width(170.dp),
@@ -61,7 +66,10 @@ fun LogInRegisterView() {
                     Text(text = "Ingresar", color = MaterialTheme.colors.secondary)
                 }
                 Button(
-                    onClick = { },
+                    onClick = {
+                        navController.popBackStack()
+                        navController.navigate(NavRoutes.Register.route)
+                    },
                     modifier = Modifier
                         .height(60.dp)
                         .width(170.dp),
@@ -79,6 +87,8 @@ fun LogInRegisterView() {
 @Composable
 
 fun LogInRegisterPreview() {
-    LogInRegisterView()
+    val navController = rememberNavController()
+
+    LogInRegisterView(navController = navController)
 
 }

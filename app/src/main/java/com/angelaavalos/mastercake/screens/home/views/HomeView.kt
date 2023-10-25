@@ -7,7 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,7 +25,8 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.angelaavalos.mastercake.BottomNavBar
+import com.angelaavalos.mastercake.navigation.NavigationHost
+import com.angelaavalos.mastercake.navigation.components.BottomNavBar
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.home.ProductsItem
 import com.angelaavalos.mastercake.screens.home.models.Product
@@ -31,50 +34,55 @@ import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 
 
 @Composable
-fun HomeView(homeViewModel: HomeViewModel) {
-    val selectedProduct = remember { mutableStateOf(null as Product?) }
+fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
+    Scaffold(
+        topBar = { TopAppBar(title = { Text("Home") }) },
+        content = { it
+            val selectedProduct = remember { mutableStateOf(null as Product?) }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(
-            modifier = Modifier.weight(1f)  // Occupy most of the space
-        ) {
-            item {
-                LazyRow(
-                    modifier = Modifier.fillMaxWidth()
+            Column(modifier = Modifier.fillMaxSize()) {
+                LazyColumn(
+                    modifier = Modifier.weight(1f)  // Occupy most of the space
                 ) {
-                    items(homeViewModel.categories) { category ->
-                        CategoriesItem(category)
+                    item {
+                        LazyRow(
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            items(homeViewModel.categories) { category ->
+                                CategoriesItem(category)
+                            }
+                        }
                     }
-                }
-            }
-            items(homeViewModel.products.windowed(2, 2, partialWindows = true)) { productPair ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    for (product in productPair) {
-                        ProductsItem(product) {
-                            selectedProduct.value = product
+                    items(homeViewModel.products.windowed(2, 2, partialWindows = true)) { productPair ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            for (product in productPair) {
+                                ProductsItem(product) {
+                                    selectedProduct.value = product
+                                }
+                            }
                         }
                     }
                 }
+
+                selectedProduct.value?.let { product ->
+                    ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null })
+                }
+                BottomNavBar(navController = navController) // This should now appear at the bottom
             }
-        }
-
-        selectedProduct.value?.let { product ->
-            ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null })
-        }
-
-
-    }
+        },
+        bottomBar = { BottomNavBar(navController = navController) }
+    )
 }
 
 
 @Composable
 fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
-    
+    val navController = rememberNavController()
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = true)
@@ -131,7 +139,7 @@ fun HomeViewPreview(){
 
     val navController = rememberNavController()
 
-    HomeView(homeViewModel = HomeViewModel())
+    HomeView(homeViewModel = HomeViewModel(), navController = navController)
     BottomNavBar(navController = navController)
 
 }
