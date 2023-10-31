@@ -21,6 +21,7 @@ import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.screens.utils.CalendarView
@@ -58,7 +59,7 @@ fun RegisterView(navController: NavController) {
             ) {
 
                 Text(
-                    text = "Registrar",
+                    text = stringResource(id = R.string.Text_register),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 20.sp,
@@ -66,7 +67,7 @@ fun RegisterView(navController: NavController) {
                     )
                 )
                 Text(
-                    text = "Email",
+                    text = stringResource(id = R.string.Text_Email2),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 16.sp,
@@ -77,7 +78,7 @@ fun RegisterView(navController: NavController) {
                     TextField(
                         value = "",
                         onValueChange = {},
-                        label = { Text(text = "angelaavalos@gmail.com") },
+                        label = { Text(text = "maquiavelo@gmail.com") },
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -88,7 +89,7 @@ fun RegisterView(navController: NavController) {
                     )
                 }
                 Text(
-                    text = "Password",
+                    text = stringResource(id = R.string.Text_Password2),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 16.sp,
@@ -99,7 +100,7 @@ fun RegisterView(navController: NavController) {
                     TextField(
                         value = "",
                         onValueChange = {},
-                        label = { Text(text = "********") },
+                        label = { Text(text = "*****************************") },
                         visualTransformation = PasswordVisualTransformation(),
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
@@ -110,7 +111,7 @@ fun RegisterView(navController: NavController) {
 
                     )
                     Text(
-                        text = "Domicilio",
+                        text = stringResource(id = R.string.Text_address),
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 16.sp,
@@ -120,7 +121,7 @@ fun RegisterView(navController: NavController) {
                     TextField(
                         value = "",
                         onValueChange = {},
-                        label = { Text(text = "Calle. Numero.") },
+                        label = { Text(text = stringResource(id = R.string.Text_address2)) },
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -131,7 +132,7 @@ fun RegisterView(navController: NavController) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Genero",
+                            text = stringResource(id = R.string.Text_gender),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 16.sp,
@@ -146,7 +147,7 @@ fun RegisterView(navController: NavController) {
                         modifier = Modifier
                     ) {
                         Text(
-                            text = "Fecha de Nacimiento",
+                            text = stringResource(id = R.string.Text_birthdate),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 16.sp,
@@ -167,7 +168,7 @@ fun RegisterView(navController: NavController) {
 
 
                     ) {
-                        Text(text = "Register")
+                        Text(text = stringResource(id = R.string.button_register2))
                     }
 
 

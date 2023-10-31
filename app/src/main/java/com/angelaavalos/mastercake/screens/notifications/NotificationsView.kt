@@ -12,14 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
+import com.angelaavalos.mastercake.R
 
 @Composable
 fun MessagesView(navController: NavController){
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Notificaciones") }) },
+        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.Notifications)) }) },
         content = { it
             Column {
                 Box(
@@ -29,7 +31,8 @@ fun MessagesView(navController: NavController){
                         imageVector = Icons.Filled.Message,
                         contentDescription = "",
                         tint = Color.Black,
-                        modifier = Modifier.size(150.dp)
+                        modifier = Modifier
+                            .size(150.dp)
                             .align(Alignment.Center)
 
                     )

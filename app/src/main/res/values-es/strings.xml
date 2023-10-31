@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MAESTRO PASTELERO</string>
+
+    <string name="button_skip">Saltar</string>
+    <string name="button_next">Siguiente</string>
+    <string name="button_begin">Empezar</string>
+    <string name="Title1">Disfruta nuestros postres</string>
+    <string name="Title2">Desafia tu paldar</string>
+    <string name="Title3">Conoce nuestras especialidades</string>
+    <string name="Description1">Los mejores del mundo</string>
+    <string name="Description2">Prueba nuestras recomendaciones</string>
+    <string name="Description3">Asegurate de probar todas las especialidades</string>
+
+
+    <string name="button_login">Ingresar</string>
+    <string name="button_register">Registrarse</string>
+
+    <string name="Text_LogIn">Ingresar</string>
+    <string name="Text_Email">Correo Electronico</string>
+    <string name="Text_Password">Contraseña</string>
+    <string name="button_LogIn2">Ingresar</string>
+
+    <string name="Text_register">Registrar</string>
+    <string name="Text_Email2">Correo Electronico</string>
+    <string name="Text_Password2">Contraseña</string>
+    <string name="Text_address">Domicilio</string>
+    <string name="Text_address2">Calle. Numero.</string>
+    <string name="Text_gender">Genero</string>
+    <string name="Text_gender2">Genero</string>
+    <string name="Text_birthdate">Fecha de Cumpleaños</string>
+    <string name="Text_birthdate2">Calendario</string>
+    <string name="button_register2">Registrarse</string>
+
+    <string name="Home">Principal</string>
+    <string name="Favorites">Favoritos</string>
+    <string name="Notifications">Notificaciones</string>
+    <string name="Cart">Carrito</string>
+
+    <string name="cakes">Pasteles</string>
+    <string name="Cupcakes">Pastelitos</string>
+    <string name="cookies">Galletas</string>
+    <string name="breads">Panes</string>
+    <string name="desserts">Postres</string>
+    <string name="forest_cake">Pastel del bosque</string>
+    <string name="chocolate_cake">Pastel chocolima</string>
+    <string name="strawberry_vanilla_cake">Pastel vainilla fresa</string>
+    <string name="cake_red_velvet">Pastel terciopelo rojo</string>
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

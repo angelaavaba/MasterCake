@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.angelaavalos.mastercake.R
@@ -51,7 +52,7 @@ fun ProductsItem(product: Product, onProductClick: ()->Unit) {
                         .clip(shape = MaterialTheme.shapes.medium)
                 )
                 Text(
-                    text = product.name,
+                    text = stringResource(id = product.name),
                     style = MaterialTheme.typography.h5,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -73,7 +74,7 @@ fun ProductsItem(product: Product, onProductClick: ()->Unit) {
 @Preview
 @Composable
 fun PreviewProductItem(){
-    ProductsItem(product = Product(R.drawable.redvelvet,"Bosque",252.00,"hola angela")) {
+    ProductsItem(product = Product(R.drawable.redvelvet,R.string.cake_red_velvet,252.00,"hola angela")) {
 
     }
 }

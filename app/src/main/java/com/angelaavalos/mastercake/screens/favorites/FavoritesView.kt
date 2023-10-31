@@ -11,18 +11,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
+import com.angelaavalos.mastercake.R
 
 @Composable
 fun FavoritesView(navController: NavController){
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Favoritos") }) },
+        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.Favorites)) }) },
         content = { it
             Column {
                 Box(
-                    modifier = Modifier.fillMaxSize().weight(1.0f)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1.0f)
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Favorite,

@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -42,7 +43,7 @@ fun LogInRegisterView(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo2),
+                painter = painterResource(id = R.drawable.logobueno),
                 contentDescription = "Imagen del logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth()
@@ -63,7 +64,7 @@ fun LogInRegisterView(navController: NavController) {
                         .width(170.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                 ) {
-                    Text(text = "Ingresar", color = MaterialTheme.colors.secondary)
+                    Text(text = stringResource(id = R.string.button_login), color = MaterialTheme.colors.secondary)
                 }
                 Button(
                     onClick = {
@@ -76,7 +77,7 @@ fun LogInRegisterView(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
 
                 ) {
-                    Text(text = "Registrarse", color = MaterialTheme.colors.secondary)
+                    Text(text = stringResource(id = R.string.button_register), color = MaterialTheme.colors.secondary)
                 }
             }
         }
