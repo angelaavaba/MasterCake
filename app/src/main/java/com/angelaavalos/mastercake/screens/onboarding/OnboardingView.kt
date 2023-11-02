@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.R
+import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
@@ -32,9 +34,14 @@ import kotlinx.coroutines.launch
 
 data class OnBoardingData(val image: Int, val title: String, val desc: String)
 
+
+
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingView(navController: NavController) {
+
+
+
     val items = ArrayList<OnBoardingData>()
 
     items.add(
@@ -156,6 +163,9 @@ fun Indicator(isSelected: Boolean) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavController) {
+    val context = LocalContext.current
+    val preferenceManager = remember { PreferenceManager(context) }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -165,8 +175,9 @@ fun BottomSection(currentPager: Int, pagerState: PagerState, navController: NavC
         // Si es la última página, añade el botón "Empezar" y oculta los demás
         if (currentPager == pagerState.pageCount - 1) {
             Button(
-                onClick = { /* Acción al presionar "Empezar" */ },
+                onClick = { preferenceManager.saveData("alreadyShowOnboarding", true)},
                 modifier = Modifier.align(Alignment.BottomCenter)
+
             ) {
                 Text("Empezar")
             }
