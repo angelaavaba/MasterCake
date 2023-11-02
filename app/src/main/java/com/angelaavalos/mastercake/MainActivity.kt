@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        topBar = { TopAppBar(title = { Text("MASTER CAKE") }) },
+        topBar = { TopAppBar(title = { Text("MASTER CAKE Salvador") }) },
         content = { it
             NavigationHost(navController = navController)
         },
