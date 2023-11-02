@@ -6,10 +6,13 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.angelaavalos.mastercake.R
+
 
 @Composable
 
@@ -36,10 +39,14 @@ fun BottomNavBar(navController: NavController) {
                     Icon(
                         imageVector = navItem.image,
                         contentDescription = navItem.title.toString()
+
                     )
                 },
                 label = {
-                    Text(text = navItem.title)
+                    Text(text = stringResource(id = navItem.title) )
+
+
+
                 }
             )
 

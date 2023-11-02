@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -31,12 +32,15 @@ import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.home.ProductsItem
 import com.angelaavalos.mastercake.screens.home.models.Product
 import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
+import com.angelaavalos.mastercake.R
+
+
 
 
 @Composable
 fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Home") }) },
+        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.Home)) }) },
         content = { it
             val selectedProduct = remember { mutableStateOf(null as Product?) }
 
@@ -107,7 +111,7 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
                         .fillMaxWidth()
                 )
                 Text(
-                    text = product.name,
+                    text = stringResource(id = product.name),
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier
                         .fillMaxWidth()

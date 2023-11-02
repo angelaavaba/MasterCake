@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.navigation.NavigationHost
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
 
+
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnsafeOptInUsageError")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        topBar = { TopAppBar(title = { Text("MASTER CAKE Salvador") }) },
+        topBar = { TopAppBar(title = { Text("MASTER CAKE") }) },
         content = { it
             NavigationHost(navController = navController)
         },

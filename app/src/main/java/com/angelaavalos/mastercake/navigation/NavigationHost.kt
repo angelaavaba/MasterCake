@@ -1,6 +1,9 @@
 package com.angelaavalos.mastercake.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,12 +17,25 @@ import com.angelaavalos.mastercake.screens.login.LoginView
 import com.angelaavalos.mastercake.screens.notifications.MessagesView
 import com.angelaavalos.mastercake.screens.onboarding.OnboardingScreen
 import com.angelaavalos.mastercake.screens.register.RegisterView
+import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 
 
 @Composable
 fun NavigationHost(navController: NavHostController){
 
-    NavHost(navController, startDestination = NavRoutes.Onboarding.route) {
+    val context = LocalContext.current
+    val preferenceManager = remember { PreferenceManager(context) }
+    val alreadyShowOnboarding = remember {
+        mutableStateOf(preferenceManager.getData("alreadyShowOnboarding",false))
+    }
+
+    NavHost(
+        navController, startDestination = if (!alreadyShowOnboarding.value){
+            NavRoutes.Onboarding.route
+        }else{
+            NavRoutes.LoginRegisterView.route
+        }
+    ) {
 
         composable(Home.route) {
             HomeView(homeViewModel = HomeViewModel(), navController = navController)

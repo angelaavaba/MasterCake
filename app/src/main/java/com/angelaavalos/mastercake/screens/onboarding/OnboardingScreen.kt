@@ -17,19 +17,23 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.navigation.NavRoutes
+import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import kotlinx.coroutines.launch
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
@@ -38,20 +42,23 @@ import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(navController: NavController){
+    val context = LocalContext.current
+    val preferenceManager = remember { PreferenceManager(context) }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         val onboarding = listOf(
-            "Disfruta nuestros postres",
-            "Desafia tu paldar",
-            "Conoce nuestras especialidades"
+            stringResource(id = R.string.Title1),
+            stringResource(id = R.string.Title2),
+            stringResource(id = R.string.Title3)
         )
         val onboarding2 = listOf(
-            "Los mejores del mundo",
-            "Prueba nuestras recomendaciones",
-            "Asegurate de probar todas las especialidades"
+            stringResource(id = R.string.Description1),
+            stringResource(id = R.string.Description2),
+            stringResource(id = R.string.Description3)
         )
+
         val onboardingImages = listOf(
             painterResource(id = R.drawable.pastel1),
             painterResource(id = R.drawable.pastel2),
@@ -144,7 +151,8 @@ fun OnboardingScreen(navController: NavController){
                         .padding(16.dp),
                     colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
                 ) {
-                    Text(text = "Next")
+                    Text(text = stringResource(id = R.string.button_next))
+
                 }
                 MASTERCAKETheme() {
 
@@ -160,12 +168,13 @@ fun OnboardingScreen(navController: NavController){
                         colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
 
                     ) {
-                        Text(text = "Skip")
+                        Text(text = stringResource(id = R.string.button_skip))
                     }
                 }
             } else {
                 Button(
                     onClick = {
+                        preferenceManager.saveData("alreadyShowOnboarding", true)
                         navController.popBackStack()
                         navController.navigate(NavRoutes.LoginRegisterView.route)
                     },
@@ -174,7 +183,8 @@ fun OnboardingScreen(navController: NavController){
                         .padding(bottom = 50.dp),
                     colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
                 ) {
-                    Text(text = "Empezar")
+                    Text(text = stringResource(id = R.string.button_begin))
+
                 }
             }
 
