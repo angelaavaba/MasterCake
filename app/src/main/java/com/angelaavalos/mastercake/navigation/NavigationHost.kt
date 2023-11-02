@@ -1,8 +1,7 @@
 package com.angelaavalos.mastercake.navigation
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -18,6 +17,7 @@ import com.angelaavalos.mastercake.screens.notifications.MessagesView
 import com.angelaavalos.mastercake.screens.onboarding.OnboardingScreen
 import com.angelaavalos.mastercake.screens.register.RegisterView
 import com.angelaavalos.mastercake.screens.utils.PreferenceManager
+import kotlinx.coroutines.delay
 
 
 @Composable
