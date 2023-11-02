@@ -17,12 +17,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.navigation.NavRoutes
+import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import kotlinx.coroutines.launch
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
@@ -39,6 +42,8 @@ import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(navController: NavController){
+    val context = LocalContext.current
+    val preferenceManager = remember { PreferenceManager(context) }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -169,6 +174,7 @@ fun OnboardingScreen(navController: NavController){
             } else {
                 Button(
                     onClick = {
+                        preferenceManager.saveData("alreadyShowOnboarding", true)
                         navController.popBackStack()
                         navController.navigate(NavRoutes.LoginRegisterView.route)
                     },
