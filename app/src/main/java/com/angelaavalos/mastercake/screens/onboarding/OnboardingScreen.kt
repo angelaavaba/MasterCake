@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,15 +49,16 @@ fun OnboardingScreen(navController: NavController){
         color = MaterialTheme.colorScheme.background
     ) {
         val onboarding = listOf(
-            "Disfruta nuestros postres",
-            "Desafia tu paldar",
-            "Conoce nuestras especialidades"
+            stringResource(id = R.string.Title1),
+            stringResource(id = R.string.Title2),
+            stringResource(id = R.string.Title3)
         )
         val onboarding2 = listOf(
-            "Los mejores del mundo",
-            "Prueba nuestras recomendaciones",
-            "Asegurate de probar todas las especialidades"
+            stringResource(id = R.string.Description1),
+            stringResource(id = R.string.Description2),
+            stringResource(id = R.string.Description3)
         )
+
         val onboardingImages = listOf(
             painterResource(id = R.drawable.pastel1),
             painterResource(id = R.drawable.pastel2),
@@ -149,7 +151,8 @@ fun OnboardingScreen(navController: NavController){
                         .padding(16.dp),
                     colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
                 ) {
-                    Text(text = "Next")
+                    Text(text = stringResource(id = R.string.button_next))
+
                 }
                 MASTERCAKETheme() {
 
@@ -165,7 +168,7 @@ fun OnboardingScreen(navController: NavController){
                         colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
 
                     ) {
-                        Text(text = "Skip")
+                        Text(text = stringResource(id = R.string.button_skip))
                     }
                 }
             } else {
@@ -180,7 +183,8 @@ fun OnboardingScreen(navController: NavController){
                         .padding(bottom = 50.dp),
                     colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
                 ) {
-                    Text(text = "Empezar")
+                    Text(text = stringResource(id = R.string.button_begin))
+
                 }
             }
 

@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.navigation.NavigationHost
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
 
+
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnsafeOptInUsageError")
     override fun onCreate(savedInstanceState: Bundle?) {

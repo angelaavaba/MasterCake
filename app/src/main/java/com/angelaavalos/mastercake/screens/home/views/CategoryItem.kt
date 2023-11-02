@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.angelaavalos.mastercake.screens.home.models.Categories
@@ -23,7 +24,11 @@ fun CategoriesItem(category: Categories) {
             modifier = Modifier
                 .width(110.dp)
                 .padding(8.dp)
-                .border(1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(20.dp))
+                .border(
+                    1.dp,
+                    color = MaterialTheme.colors.primary,
+                    shape = RoundedCornerShape(20.dp)
+                )
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth()
@@ -41,7 +46,7 @@ fun CategoriesItem(category: Categories) {
 
                 )
                 Text(
-                    text = category.name,
+                    text = stringResource(id = category.name),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp),

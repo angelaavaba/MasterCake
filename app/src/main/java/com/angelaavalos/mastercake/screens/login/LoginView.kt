@@ -12,6 +12,7 @@ import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -56,7 +57,7 @@ fun LoginView(navController: NavController) {
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
                     Text(
-                        text = "Ingresar",
+                        text = stringResource(id = R.string.Text_LogIn),
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 20.sp,
@@ -65,7 +66,7 @@ fun LoginView(navController: NavController) {
                     )
 
                     Text(
-                        text = "Email",
+                        text = stringResource(id = R.string.Text_Email),
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 16.sp,
@@ -87,7 +88,7 @@ fun LoginView(navController: NavController) {
                         )
                     }
                     Text(
-                        text = "Password",
+                        text = stringResource(id = R.string.Text_Password),
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 16.sp,
@@ -98,7 +99,7 @@ fun LoginView(navController: NavController) {
                         TextField(
                             value = "",
                             onValueChange = {},
-                            label = { Text(text = "********") },
+                            label = { Text(text = "****************************************") },
                             visualTransformation = PasswordVisualTransformation(),
                             textStyle = TextStyle(color = Color.White),
                             modifier = Modifier
@@ -117,7 +118,8 @@ fun LoginView(navController: NavController) {
 
 
                     ) {
-                        Text(text = "Log In")
+                        Text(text = stringResource(id = R.string.button_LogIn2))
+
                     }
 
 

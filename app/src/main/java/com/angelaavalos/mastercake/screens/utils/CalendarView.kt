@@ -12,9 +12,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import java.util.*
+import com.angelaavalos.mastercake.R
+
 
 @Composable
 fun CalendarView(){
@@ -49,7 +52,7 @@ fun CalendarView(){
             .fillMaxWidth()
             .height(50.dp)
     ) {
-        Text(text = if (mDate.value.isNotBlank()) mDate.value else "Calendario")
+        Text(text = if (mDate.value.isNotBlank()) mDate.value else stringResource(id = R.string.Text_birthdate2))
     }
 
 

@@ -1,3 +1,63 @@
 <resources>
     <string name="app_name">MASTERCAKE</string>
+    <string name="button_skip">Skip</string>
+    <string name="button_next">Next</string>
+    <string name="button_begin">Begin</string>
+    <string name="Title1">Enjoy our desserts</string>
+    <string name="Title2">Challenge your palate</string>
+    <string name="Title3">Learn about our specialties</string>
+    <string name="Description1">The best of the world</string>
+    <string name="Description2">Try our recommendations</string>
+    <string name="Description3">Be sure to try all the specialties</string>
+
+    <string name="button_login">Log In</string>
+    <string name="button_register">Register</string>
+
+    <string name="Text_LogIn">Log In</string>
+    <string name="Text_Email">Email</string>
+    <string name="Text_Password">Password</string>
+    <string name="button_LogIn2">Log In</string>
+
+    <string name="Text_register">Register</string>
+    <string name="Text_Email2">Email</string>
+    <string name="Text_Password2">Password</string>
+    <string name="Text_address">Address</string>
+    <string name="Text_address2">Street. Number.</string>
+    <string name="Text_gender">Gender</string>
+    <string name="Text_gender2">Gender</string>
+    <string name="Text_birthdate">Birthdate</string>
+    <string name="Text_birthdate2">Calendar</string>
+    <string name="button_register2">Register</string>
+
+    <string name="Home">Home</string>
+    <string name="Favorites">Favorites</string>
+    <string name="Notifications">Notifications</string>
+    <string name="Cart">Cart</string>
+
+    <string name="cakes">Cakes</string>
+    <string name="Cupcakes">Cupcakes</string>
+    <string name="cookies">Cookies</string>
+    <string name="breads">Breads</string>
+    <string name="desserts">Desserts</string>
+    <string name="forest_cake">Forest Cake</string>
+    <string name="chocolate_cake">Chocolime Cake</string>
+    <string name="strawberry_vanilla_cake">Strawberry Vanilla Cake</string>
+    <string name="cake_red_velvet">Red Velvet Cake</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>
