@@ -1,6 +1,7 @@
 package com.angelaavalos.mastercake.screens.utils
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -18,8 +19,9 @@ import androidx.compose.ui.unit.toSize
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 import com.angelaavalos.mastercake.R
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
-fun DropDownMenu(){
+fun DropDownMenuGender(){
 
     // Declaring a boolean value to store
     // the expanded state of the Text Field
@@ -84,5 +86,5 @@ fun DropDownMenu(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview4(){
-    DropDownMenu()
+    DropDownMenuGender()
 }
