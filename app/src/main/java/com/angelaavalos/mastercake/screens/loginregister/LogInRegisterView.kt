@@ -53,6 +53,7 @@ fun LogInRegisterView(navController: NavController) {
                     .fillMaxWidth()
                     .padding(35.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
+                
             ) {
                 Button(
                     onClick = {
