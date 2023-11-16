@@ -13,6 +13,7 @@ import com.angelaavalos.mastercake.screens.favorites.FavoritesView
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.loginregister.LogInRegisterView
 import com.angelaavalos.mastercake.screens.login.LoginView
+import com.angelaavalos.mastercake.screens.login.LoginViewModel
 import com.angelaavalos.mastercake.screens.notifications.MessagesView
 import com.angelaavalos.mastercake.screens.onboarding.OnboardingScreen
 import com.angelaavalos.mastercake.screens.register.RegisterView
@@ -59,7 +60,7 @@ fun NavigationHost(navController: NavHostController){
         }
 
         composable(LoginView.route){
-            LoginView(navController = navController)
+            LoginView(navController = navController, viewModel = LoginViewModel())
         }
 
         composable(LoginRegisterView.route){

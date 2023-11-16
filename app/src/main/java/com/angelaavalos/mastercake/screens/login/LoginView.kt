@@ -19,14 +19,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.navigation.NavRoutes
+import com.angelaavalos.mastercake.screens.login.model.LoginDataBody
 
 
 @Composable
-fun LoginView(navController: NavController) {
+fun LoginView(navController: NavController, viewModel:LoginViewModel) {
+
     Column {
         Box(
             modifier = Modifier
@@ -110,7 +113,12 @@ fun LoginView(navController: NavController) {
                         )
                     }
                     Button(
-                        onClick = { navController.navigate(NavRoutes.Home.route) },
+                        onClick = { //navController.navigate(NavRoutes.Home.route)
+                            viewModel.doLogin(
+                                LoginDataBody(
+                                    usrn = "Lupita", password = "12345"
+                                )
+                            )},
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
@@ -135,5 +143,5 @@ fun LoginView(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun LogInPreview() {
-    LoginView(navController = rememberNavController())
+    LoginView(navController = rememberNavController(), viewModel = LoginViewModel())
 }
