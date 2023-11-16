@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.screens.utils.CalendarView
-import com.angelaavalos.mastercake.screens.utils.DropDownMenu
+import com.angelaavalos.mastercake.screens.utils.DropDownMenuGender
 
 @Composable
 fun RegisterView(navController: NavController) {
@@ -100,7 +100,7 @@ fun RegisterView(navController: NavController) {
                     TextField(
                         value = "",
                         onValueChange = {},
-                        label = { Text(text = "*****************************") },
+                        label = { Text(text = "**********") },
                         visualTransformation = PasswordVisualTransformation(),
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
@@ -140,7 +140,7 @@ fun RegisterView(navController: NavController) {
                             )
                         )
                         Spacer(modifier = Modifier.size(20.dp))
-                        DropDownMenu()
+                        DropDownMenuGender()
                     }
                     Row(
                         verticalAlignment = Alignment.CenterVertically,

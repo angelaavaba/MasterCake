@@ -13,6 +13,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -33,8 +34,7 @@ import com.angelaavalos.mastercake.screens.home.ProductsItem
 import com.angelaavalos.mastercake.screens.home.models.Product
 import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 import com.angelaavalos.mastercake.R
-
-
+import com.angelaavalos.mastercake.screens.utils.DropDownMenuSize
 
 
 @Composable
@@ -101,7 +101,8 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 Image(
                     painter = painterResource(id = product.image),
@@ -110,32 +111,40 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()
                 )
-                Text(
-                    text = stringResource(id = product.name),
-                    style = MaterialTheme.typography.h4,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                        Text(
+                            text = stringResource(id = product.name),
+                            style = MaterialTheme.typography.h5,
+                        )
+                        Text(
+                            text = product.price.toString() + "MXN",
+                            style = MaterialTheme.typography.h6
+                        )
+                    }
+
+
                 Text(
                     text = product.description,
-                    style = MaterialTheme.typography.h5,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                )
-                Text(
-                    text = product.price.toString() + "MXN",
                     style = MaterialTheme.typography.h6,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
 
+                DropDownMenuSize()
+
+                // Puedes agregar más elementos debajo de la descripción según sea necesario.
             }
         }
     }
 }
+
 
 @Composable
 @Preview
