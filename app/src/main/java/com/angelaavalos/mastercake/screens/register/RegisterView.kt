@@ -22,13 +22,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.angelaavalos.mastercake.screens.register.model.RegisterDataBody
 import com.angelaavalos.mastercake.screens.utils.CalendarView
 import com.angelaavalos.mastercake.screens.utils.DropDownMenuGender
 
 @Composable
-fun RegisterView(navController: NavController) {
+fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
 
     Box(
         modifier = Modifier
@@ -160,9 +162,16 @@ fun RegisterView(navController: NavController) {
 
                 }
                     Button(
-                        onClick = { navController.navigate(route = "homeroute") },
+                        onClick = { //navController.navigate(route = "homeroute")
+                            viewModel.doRegister(
+                                RegisterDataBody(
+                                    usrn = "alex412", password = "23456", domicilio = "calle lopez doriga", sexo = "Masculino"
+                                )
+                            )},
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth(
+
+                            )
                             .height(50.dp),
                         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
 
@@ -186,6 +195,6 @@ fun DefaultPreview3(){
     val navController = rememberNavController()
 
     // Aquí proporciona el navController a RegisterView
-    RegisterView(navController = navController)
+    RegisterView(navController = navController, viewModel = RegisterViewModel())
 
 }

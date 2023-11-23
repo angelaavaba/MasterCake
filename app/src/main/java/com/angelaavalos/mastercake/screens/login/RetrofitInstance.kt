@@ -1,6 +1,7 @@
 package com.angelaavalos.mastercake.screens.login
 
 import com.angelaavalos.mastercake.screens.login.network.LoginService
+import com.angelaavalos.mastercake.screens.register.network.RegisterService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,5 +28,9 @@ object RetrofitInstance {
 
     val loginService: LoginService by lazy {
         retrofit.create(LoginService::class.java)
+    }
+
+    val registerService: RegisterService by lazy {
+        retrofit.create(RegisterService::class.java)
     }
 }

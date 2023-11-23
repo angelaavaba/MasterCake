@@ -17,6 +17,7 @@ import com.angelaavalos.mastercake.screens.login.LoginViewModel
 import com.angelaavalos.mastercake.screens.notifications.MessagesView
 import com.angelaavalos.mastercake.screens.onboarding.OnboardingScreen
 import com.angelaavalos.mastercake.screens.register.RegisterView
+import com.angelaavalos.mastercake.screens.register.RegisterViewModel
 import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import kotlinx.coroutines.delay
 
@@ -52,7 +53,7 @@ fun NavigationHost(navController: NavHostController){
         }
 
         composable(Register.route){
-            RegisterView(navController = navController)
+            RegisterView(navController = navController, viewModel = RegisterViewModel())
         }
 
         composable(Onboarding.route){

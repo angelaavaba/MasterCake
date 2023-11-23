@@ -30,6 +30,9 @@ import com.angelaavalos.mastercake.screens.login.model.LoginDataBody
 @Composable
 fun LoginView(navController: NavController, viewModel:LoginViewModel) {
 
+
+
+
     Column {
         Box(
             modifier = Modifier
@@ -102,7 +105,7 @@ fun LoginView(navController: NavController, viewModel:LoginViewModel) {
                         TextField(
                             value = "",
                             onValueChange = {},
-                            label = { Text(text = "****************************************") },
+                            label = { Text(text = "*******") },
                             visualTransformation = PasswordVisualTransformation(),
                             textStyle = TextStyle(color = Color.White),
                             modifier = Modifier
@@ -113,12 +116,12 @@ fun LoginView(navController: NavController, viewModel:LoginViewModel) {
                         )
                     }
                     Button(
-                        onClick = { //navController.navigate(NavRoutes.Home.route)
+                        onClick = {// navController.navigate(NavRoutes.Home.route)
                             viewModel.doLogin(
-                                LoginDataBody(
+                            LoginDataBody(
                                     usrn = "Lupita", password = "12345"
-                                )
-                            )},
+                               ))
+                            },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
