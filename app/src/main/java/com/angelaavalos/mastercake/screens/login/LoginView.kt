@@ -1,12 +1,14 @@
 package com.angelaavalos.mastercake.screens.login
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 import androidx.compose.ui.Modifier
@@ -28,12 +30,49 @@ import com.angelaavalos.mastercake.screens.login.model.LoginDataBody
 
 
 @Composable
-fun LoginView(navController: NavController, viewModel:LoginViewModel) {
+fun LoginView(navController: NavController, viewModel: LoginViewModel) {
+
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    val isLoginSuccessful by viewModel.isLoginSuccessful.observeAsState()
+    var showErrorDialog by remember { mutableStateOf(false) }
+    val loginAttempted by viewModel.loginAttempted.observeAsState()
+
+    LaunchedEffect(isLoginSuccessful) {
+        if (loginAttempted == true) {
+            if (isLoginSuccessful == true) {
+                showErrorDialog = false
+                navController.navigate(NavRoutes.Home.route) {
+                    popUpTo(NavRoutes.Home.route) { inclusive = true }
+                }
+            } else {
+                Log.d("error", "error")
+                showErrorDialog = true
+            }
+        } else {
+            showErrorDialog = false
+        }
+    }
 
 
 
 
     Column {
+        if (showErrorDialog) {
+            AlertDialog(
+                onDismissRequest = { showErrorDialog = false },
+                title = { Text("Error") },
+                text = { Text("Usuario incorrecto") },
+                confirmButton = {
+                    Button(
+                        onClick = { showErrorDialog = false }
+                    ) {
+                        Text("Aceptar")
+                    }
+                }
+            )
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -81,9 +120,9 @@ fun LoginView(navController: NavController, viewModel:LoginViewModel) {
                     )
                     MASTERCAKETheme() {
                         TextField(
-                            value = "",
-                            onValueChange = {},
-                            label = { Text(text = "angelaavalos@gmail.com") },
+                            value = username,
+                            onValueChange = { username = it },
+                            label = { Text(text = "username") },
                             textStyle = TextStyle(color = Color.White),
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -103,8 +142,8 @@ fun LoginView(navController: NavController, viewModel:LoginViewModel) {
                     )
                     MASTERCAKETheme {
                         TextField(
-                            value = "",
-                            onValueChange = {},
+                            value = password,
+                            onValueChange = { password = it },
                             label = { Text(text = "*******") },
                             visualTransformation = PasswordVisualTransformation(),
                             textStyle = TextStyle(color = Color.White),
@@ -118,10 +157,12 @@ fun LoginView(navController: NavController, viewModel:LoginViewModel) {
                     Button(
                         onClick = {// navController.navigate(NavRoutes.Home.route)
                             viewModel.doLogin(
-                            LoginDataBody(
-                                    usrn = "Lupita", password = "12345"
-                               ))
-                            },
+                                LoginDataBody(
+                                    usrn = username,
+                                    password = password
+                                )
+                            )
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),

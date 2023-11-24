@@ -1,5 +1,6 @@
 package com.angelaavalos.mastercake.screens.register
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,11 +21,12 @@ import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.angelaavalos.mastercake.navigation.NavRoutes
 import com.angelaavalos.mastercake.screens.register.model.RegisterDataBody
 import com.angelaavalos.mastercake.screens.utils.CalendarView
 import com.angelaavalos.mastercake.screens.utils.DropDownMenuGender
@@ -32,11 +34,50 @@ import com.angelaavalos.mastercake.screens.utils.DropDownMenuGender
 @Composable
 fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
 
+    var username by remember{ mutableStateOf("")}
+    var password by remember{ mutableStateOf("")}
+    var domicilio by remember{ mutableStateOf("")}
+    var sexo by remember{ mutableStateOf("Masculino")}
+    val isRegisterSuccessful by viewModel.isRegisterSuccessful.observeAsState()
+    var showErrorDialog by remember { mutableStateOf(false) }
+    val loginAttempted by viewModel.registerAttempted.observeAsState()
+
+
+    LaunchedEffect(isRegisterSuccessful) {
+        if (loginAttempted == true) {
+            if (isRegisterSuccessful == true) {
+                showErrorDialog = false
+                navController.navigate(NavRoutes.LoginView.route) {
+                    popUpTo(NavRoutes.LoginView.route) { inclusive = true }
+                }
+            } else {
+                Log.d("error", "error")
+                showErrorDialog = true
+            }
+        } else {
+            showErrorDialog = false
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colors.secondary)
     ) {
+        if (showErrorDialog) {
+            AlertDialog(
+                onDismissRequest = { showErrorDialog = false },
+                title = { Text("Error") },
+                text = { Text("Datos faltantes") },
+                confirmButton = {
+                    Button(
+                        onClick = { showErrorDialog = false }
+                    ) {
+                        Text("Aceptar")
+                    }
+                }
+            )
+        }
         Image(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "",
@@ -78,8 +119,8 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
                 )
                 MASTERCAKETheme() {
                     TextField(
-                        value = "",
-                        onValueChange = {},
+                        value = username,
+                        onValueChange = {username = it},
                         label = { Text(text = "maquiavelo@gmail.com") },
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
@@ -100,8 +141,8 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
                 )
                 MASTERCAKETheme {
                     TextField(
-                        value = "",
-                        onValueChange = {},
+                        value = password,
+                        onValueChange = {password = it},
                         label = { Text(text = "**********") },
                         visualTransformation = PasswordVisualTransformation(),
                         textStyle = TextStyle(color = Color.White),
@@ -121,8 +162,8 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
                         )
                     )
                     TextField(
-                        value = "",
-                        onValueChange = {},
+                        value = domicilio,
+                        onValueChange = {domicilio = it},
                         label = { Text(text = stringResource(id = R.string.Text_address2)) },
                         textStyle = TextStyle(color = Color.White),
                         modifier = Modifier
@@ -144,7 +185,7 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
                         Spacer(modifier = Modifier.size(20.dp))
                         DropDownMenuGender()
                     }
-                    Row(
+                   /* Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                     ) {
@@ -158,14 +199,17 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
                         )
                         Spacer(modifier = Modifier.size(20.dp))
                         CalendarView()
-                    }
+                    }*/
 
                 }
                     Button(
                         onClick = { //navController.navigate(route = "homeroute")
                             viewModel.doRegister(
                                 RegisterDataBody(
-                                    usrn = "alex412", password = "23456", domicilio = "calle lopez doriga", sexo = "Masculino"
+                                    usrn = username,
+                                    password = password,
+                                    domicilio = domicilio,
+                                    sexo = sexo
                                 )
                             )},
                         modifier = Modifier
