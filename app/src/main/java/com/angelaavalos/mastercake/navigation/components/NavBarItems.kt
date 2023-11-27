@@ -28,6 +28,11 @@ import com.angelaavalos.mastercake.R
             image = Icons.Filled.ShoppingCart,
             route = "cartroute"
         ),
+        BarItem(
+            title = R.string.User,
+            image = Icons.Filled.AccountBox,
+            route = "userroute"
+        ),
 
 
     )
