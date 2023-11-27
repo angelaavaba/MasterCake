@@ -1,4 +1,4 @@
-package com.angelaavalos.mastercake.screens.home
+package com.angelaavalos.mastercake.screens.home.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -47,7 +47,7 @@ fun ProductsItem(product: Product, onProductClick: () -> Unit, url: String) {
                         .clip(shape = MaterialTheme.shapes.medium)
                 )
                 Text(
-                    text = product.name,
+                    text = product.product,
                     style = MaterialTheme.typography.h5,
                     modifier = Modifier
                         .fillMaxWidth()

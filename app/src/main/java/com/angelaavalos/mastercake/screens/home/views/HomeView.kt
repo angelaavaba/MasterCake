@@ -27,7 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
-import com.angelaavalos.mastercake.screens.home.ProductsItem
+import com.angelaavalos.mastercake.screens.home.views.ProductsItem
 import com.angelaavalos.mastercake.screens.home.models.Product
 import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 import com.angelaavalos.mastercake.R
@@ -133,7 +133,7 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: Strin
                 ) {
 
                         Text1(
-                            text = product.name,
+                            text = product.product,
                             style = MaterialTheme.typography.h5,
                         )
                     Text1(
