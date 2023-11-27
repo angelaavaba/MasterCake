@@ -18,54 +18,66 @@ import com.angelaavalos.mastercake.screens.notifications.MessagesView
 import com.angelaavalos.mastercake.screens.onboarding.OnboardingScreen
 import com.angelaavalos.mastercake.screens.register.RegisterView
 import com.angelaavalos.mastercake.screens.register.RegisterViewModel
+import com.angelaavalos.mastercake.screens.splashscreen.SplashScreen
+import com.angelaavalos.mastercake.screens.user.UsersView
 import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import kotlinx.coroutines.delay
 
 
 @Composable
-fun NavigationHost(navController: NavHostController){
+fun NavigationHost(navController: NavHostController) {
 
     val context = LocalContext.current
     val preferenceManager = remember { PreferenceManager(context) }
     val alreadyShowOnboarding = remember {
-        mutableStateOf(preferenceManager.getData("alreadyShowOnboarding",false))
+        mutableStateOf(preferenceManager.getData("alreadyShowOnboarding", false))
     }
 
     NavHost(
-        navController, startDestination = if (!alreadyShowOnboarding.value){
+        navController, startDestination = if (!alreadyShowOnboarding.value) {
             NavRoutes.Onboarding.route
-        }else{
-            NavRoutes.LoginRegisterView.route
+        } else {
+            NavRoutes.SplashView.route
         }
     ) {
 
         composable(Home.route) {
             HomeView(homeViewModel = HomeViewModel(), navController = navController)
         }
-        composable(FavoritesView.route){
-           FavoritesView(navController = navController)
+        composable(FavoritesView.route) {
+            FavoritesView(navController = navController)
         }
-        composable(NotificationsView.route){
+        composable(NotificationsView.route) {
             MessagesView(navController = navController)
         }
-        composable(CartView.route){
-           CartView(navController = navController)
+        composable(CartView.route) {
+            CartView(navController = navController)
         }
 
-        composable(Register.route){
+        composable(Register.route) {
             RegisterView(navController = navController, viewModel = RegisterViewModel())
         }
 
-        composable(Onboarding.route){
+        composable(Onboarding.route) {
             OnboardingScreen(navController = navController)
         }
 
-        composable(LoginView.route){
+        composable(LoginView.route) {
             LoginView(navController = navController, viewModel = LoginViewModel())
         }
 
-        composable(LoginRegisterView.route){
+        composable(LoginRegisterView.route) {
             LogInRegisterView(navController = navController)
+        }
+        composable(UsersView.route) {
+            UsersView(navController = navController)
+
+
+        }
+        composable(SplashView.route) {
+            SplashScreen(navController = navController)
+
+
         }
     }
 }
