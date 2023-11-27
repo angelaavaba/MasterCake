@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
@@ -25,6 +26,7 @@ import com.angelaavalos.mastercake.navigation.components.BottomNavBar
 import com.google.android.gms.auth.api.Auth
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
+import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.loginregister.AuthView
 
 
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private lateinit var biometricPrompt: BiometricPrompt
     var isAuthenticated = mutableStateOf(false)
+    private val viewModelHome: HomeViewModel by viewModels()
+
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                  NavigationHost(navController)
+                  NavigationHost(navController, viewModelHome)
              //   AuthView(isAuthenticated, onAuthenticated = ::handleAuthenticationResult)
 
             }
@@ -131,7 +135,7 @@ fun MainScreen() {
     Scaffold(
         topBar = { TopAppBar(title = { Text("MASTER CAKE") }) },
         content = { it
-            NavigationHost(navController = navController)
+            NavigationHost(navController = navController, homeViewModel = HomeViewModel())
         },
         bottomBar = { BottomNavBar(navController = navController) }
     )

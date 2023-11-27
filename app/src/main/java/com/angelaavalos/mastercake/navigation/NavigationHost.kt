@@ -1,5 +1,6 @@
 package com.angelaavalos.mastercake.navigation
 
+import androidx.activity.viewModels
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
@@ -23,13 +24,14 @@ import kotlinx.coroutines.delay
 
 
 @Composable
-fun NavigationHost(navController: NavHostController){
+fun NavigationHost(navController: NavHostController, homeViewModel: HomeViewModel){
 
     val context = LocalContext.current
     val preferenceManager = remember { PreferenceManager(context) }
     val alreadyShowOnboarding = remember {
         mutableStateOf(preferenceManager.getData("alreadyShowOnboarding",false))
     }
+
 
     NavHost(
         navController, startDestination = if (!alreadyShowOnboarding.value){
@@ -40,7 +42,7 @@ fun NavigationHost(navController: NavHostController){
     ) {
 
         composable(Home.route) {
-            HomeView(homeViewModel = HomeViewModel(), navController = navController)
+            HomeView(homeViewModel = homeViewModel, navController = navController)
         }
         composable(FavoritesView.route){
            FavoritesView(navController = navController)
