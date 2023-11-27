@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -117,15 +118,20 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: Strin
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                val image = rememberImagePainter(url)
+                val image = rememberImagePainter(
+                    data = url,
+                    builder = {
+                        crossfade(true)
+                        error(R.drawable.logobueno) // Imagen de error
+                        placeholder(R.drawable.ic_launcher_background) // Imagen de carga
+                    }
+                )
                 Image(
                     painter = image,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                 )
-
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -133,7 +139,7 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: Strin
                 ) {
 
                         Text1(
-                            text = product.name,
+                            text = product.product,
                             style = MaterialTheme.typography.h5,
                         )
                     Text1(
@@ -142,14 +148,6 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: Strin
                     )
                     }
 
-
-                Text1(
-                    text = product.description,
-                    style = MaterialTheme.typography.h6,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                )
 
                 DropDownMenuSize()
 

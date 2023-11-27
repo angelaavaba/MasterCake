@@ -28,13 +28,13 @@ class HomeViewModel : ViewModel(){
         this.jwt = userJwt
         viewModelScope.launch {
             try{
-                val cards = repository.getProducts()
-                _products.value = cards
+                val products = repository.getProducts()
+                _products.value = products
+                Log.d("Contador", "Product count: ${products.count()}")
+                Log.d("Contador", "Product count: ${products[0].product}")
             }catch(e: Exception){
                 Log.e("API_ERROR", "Token used: $jwt")
                 e.printStackTrace()
-
-
             }
         }
     }
