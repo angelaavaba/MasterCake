@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -15,17 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.angelaavalos.mastercake.R
+import coil.compose.rememberImagePainter
 import com.angelaavalos.mastercake.screens.home.models.Product
-import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
 @Composable
-fun ProductsItem(product: Product, onProductClick: () -> Unit) {
+fun ProductsItem(product: Product, onProductClick: () -> Unit, url: String) {
+
     MASTERCAKETheme() {
         Card(
             modifier = Modifier
@@ -40,8 +37,9 @@ fun ProductsItem(product: Product, onProductClick: () -> Unit) {
             Column(
                 modifier = Modifier.fillMaxWidth()
             ) {
+                val image = rememberImagePainter(url)
                 Image(
-                    painter = painterResource(id = product.image),
+                    painter = image,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -49,7 +47,7 @@ fun ProductsItem(product: Product, onProductClick: () -> Unit) {
                         .clip(shape = MaterialTheme.shapes.medium)
                 )
                 Text(
-                    text = stringResource(id = product.name),
+                    text = product.name,
                     style = MaterialTheme.typography.h5,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -67,12 +65,6 @@ fun ProductsItem(product: Product, onProductClick: () -> Unit) {
                         text = product.price.toString() + "MXN",
                     )
 
-                    Button(
-                        onClick = { /* Acción del botón */ },
-                        shape = RoundedCornerShape(15.dp)
-                    ) {
-                        Text("+")
-                    }
                 }
             }
         }
@@ -83,7 +75,5 @@ fun ProductsItem(product: Product, onProductClick: () -> Unit) {
 @Preview
 @Composable
 fun PreviewProductItem(){
-    ProductsItem(product = Product(R.drawable.redvelvet,R.string.cake_red_velvet,252.00,"hola angela")) {
 
-    }
 }

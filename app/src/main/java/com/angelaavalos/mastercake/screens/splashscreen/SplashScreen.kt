@@ -21,7 +21,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 
-fun SplashScreen() {
+fun SplashScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -43,5 +43,5 @@ fun SplashScreen() {
 @Composable
 fun SplashScreenPreview() {
 
-    SplashScreen()
+
 }

@@ -11,4 +11,7 @@ sealed class NavRoutes(val route: String) {
     object LoginView : NavRoutes("loginview")
     object LoginRegisterView : NavRoutes("loginregisterview")
 
+
+
+
 }

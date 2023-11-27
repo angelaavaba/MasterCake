@@ -8,17 +8,15 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,8 +24,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.angelaavalos.mastercake.navigation.NavigationHost
+import coil.compose.rememberImagePainter
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.home.ProductsItem
@@ -35,12 +32,28 @@ import com.angelaavalos.mastercake.screens.home.models.Product
 import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.screens.utils.DropDownMenuSize
+import com.angelaavalos.mastercake.security.TokenManager
+import androidx.compose.material.Text as Text1
 
 
 @Composable
 fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
+
+   val products by homeViewModel.products.observeAsState(emptyList())
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit){
+        val jwt = TokenManager.getToken(context)
+        if(!jwt.isNullOrBlank()){
+            homeViewModel.fetchProducts(jwt)
+        }else{
+
+        }
+
+    }
+
     Scaffold(
-        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.Home)) }) },
+        topBar = { TopAppBar(title = { Text1(stringResource(id = R.string.Home)) }) },
         content = { it
             val selectedProduct = remember { mutableStateOf(null as Product?) }
 
@@ -57,24 +70,25 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
                             }
                         }
                     }
-                    items(homeViewModel.products.windowed(2, 2, partialWindows = true)) { productPair ->
+                    items(products.chunked(2)) {productPair ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(16.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            for (product in productPair) {
-                                ProductsItem(product) {
+                            productPair.forEach { product ->
+                                // Pass the product image URL to ProductsItem
+                                ProductsItem(product = product, onProductClick = {
                                     selectedProduct.value = product
-                                }
+                                }, url = product.image)
                             }
                         }
                     }
                 }
 
                 selectedProduct.value?.let { product ->
-                    ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null })
+                    ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null }, url = product.image)
                 }
                 BottomNavBar(navController = navController) // This should now appear at the bottom
             }
@@ -83,9 +97,8 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
     )
 }
 
-
 @Composable
-fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
+fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: String) {
     val navController = rememberNavController()
     Dialog(
         onDismissRequest = { onDismiss() },
@@ -104,8 +117,9 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
+                val image = rememberImagePainter(url)
                 Image(
-                    painter = painterResource(id = product.image),
+                    painter = image,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -118,18 +132,18 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                        Text(
-                            text = stringResource(id = product.name),
+                        Text1(
+                            text = product.name,
                             style = MaterialTheme.typography.h5,
                         )
-                        Text(
-                            text = product.price.toString() + "MXN",
-                            style = MaterialTheme.typography.h6
-                        )
+                    Text1(
+                        text = product.price.toString() + "MXN",
+                        style = MaterialTheme.typography.h6
+                    )
                     }
 
 
-                Text(
+                Text1(
                     text = product.description,
                     style = MaterialTheme.typography.h6,
                     modifier = Modifier

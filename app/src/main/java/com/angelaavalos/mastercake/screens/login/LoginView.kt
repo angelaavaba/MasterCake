@@ -1,5 +1,6 @@
 package com.angelaavalos.mastercake.screens.login
 
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -13,6 +14,7 @@ import androidx.compose.ui.Alignment
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -27,6 +29,9 @@ import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.navigation.NavRoutes
 import com.angelaavalos.mastercake.screens.login.model.LoginDataBody
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import kotlin.coroutines.coroutineContext
 
 
 @Composable
@@ -154,13 +159,13 @@ fun LoginView(navController: NavController, viewModel: LoginViewModel) {
 
                         )
                     }
+                    val context = LocalContext.current
                     Button(
                         onClick = {// navController.navigate(NavRoutes.Home.route)
+
                             viewModel.doLogin(
-                                LoginDataBody(
-                                    usrn = username,
-                                    password = password
-                                )
+                                LoginDataBody(usrn = username, password = password),
+                                context = context
                             )
                         },
                         modifier = Modifier
@@ -171,6 +176,7 @@ fun LoginView(navController: NavController, viewModel: LoginViewModel) {
 
                     ) {
                         Text(text = stringResource(id = R.string.button_LogIn2))
+
 
                     }
 
