@@ -10,4 +10,9 @@ class ProductRepository(private val jwt:String){
         val formattedToken = "Bearer $jwt"
         return productService.getProducts(formattedToken)
     }
+
+    suspend fun getProductsByCategory(categoryId: String): List<Product> {
+        val formattedToken = "Bearer $jwt"
+        return productService.getProductsByCategory(formattedToken, categoryId)
+    }
 }

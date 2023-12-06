@@ -24,6 +24,9 @@ class HomeViewModel : ViewModel(){
     private val _categories = MutableLiveData<List<Category>>()
     val categories: LiveData<List<Category>> = _categories
 
+    private val _selectedCategoryProducts = MutableLiveData<List<Product>>()
+    val selectedCategoryProducts: LiveData<List<Product>> = _selectedCategoryProducts
+
     fun fetchProducts(userJwt: String){
         this.jwt = userJwt
         viewModelScope.launch {
@@ -47,6 +50,25 @@ class HomeViewModel : ViewModel(){
                 Log.e("API_ERROR", "Token used: $jwt")
                 e.printStackTrace()
             }
+        }
+    }
+
+    fun fetchProductsByCategory(categoryId: String) {
+        Log.d("HomeViewModel", "Fetching products for category: $categoryId")
+        viewModelScope.launch {
+            try {
+                val products = repositoryP.getProductsByCategory(categoryId)
+                _selectedCategoryProducts.value = products
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Error fetching products by category: $jwt")
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun refreshAllProducts(){
+        if(this::jwt.isInitialized){
+            fetchProducts(jwt)
         }
     }
 

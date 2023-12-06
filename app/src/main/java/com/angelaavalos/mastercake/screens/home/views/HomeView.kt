@@ -6,9 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -34,7 +32,6 @@ import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.screens.utils.DropDownMenuSize
 import com.angelaavalos.mastercake.security.TokenManager
-import androidx.compose.material.Text
 import androidx.compose.ui.text.style.TextAlign
 
 
@@ -44,6 +41,11 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
     val products by homeViewModel.products.observeAsState(emptyList())
     val categories by homeViewModel.categories.observeAsState(emptyList())
     val context = LocalContext.current
+
+    val allProducts by homeViewModel.products.observeAsState(emptyList())
+    val selectedCategoryProducts by homeViewModel.selectedCategoryProducts.observeAsState(emptyList())
+
+    val productsToDisplay = if (selectedCategoryProducts.isNotEmpty()) selectedCategoryProducts else allProducts
 
     LaunchedEffect(Unit){
         val jwt = TokenManager.getToken(context)
@@ -70,11 +72,16 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             items(categories) { category ->
-                                CategoriesItem(category = category, url = category.image)
+                                CategoriesItem(category = category, url = category.image){ categoryId ->
+                                    homeViewModel.fetchProductsByCategory(categoryId)
+                                }
                             }
                         }
                     }
-                    items(products.chunked(2)) {productPair ->
+                    items(productsToDisplay.chunked(2), key = { pair ->
+                        // Combine the IDs of the products in the pair to create a unique key
+                        pair.joinToString(separator = "-") { it._id }
+                    }) { productPair ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -82,14 +89,18 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             productPair.forEach { product ->
-                                // Pass the product image URL to ProductsItem
                                 ProductsItem(product = product, onProductClick = {
                                     selectedProduct.value = product
                                 }, url = product.image)
                             }
                         }
                     }
+
                 }
+
+               /* Button(onClick = { homeViewModel.refreshAllProducts() }) {
+                    Text("Show All Products")
+                }*/
 
                 selectedProduct.value?.let { product ->
                     ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null }, url = product.image)
@@ -158,7 +169,9 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: Strin
                 Text(
                     text = product.description,
                     style = MaterialTheme.typography.body1,
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
                     textAlign = TextAlign.Center
                 )
 

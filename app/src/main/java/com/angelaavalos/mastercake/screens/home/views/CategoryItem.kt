@@ -2,6 +2,7 @@ package com.angelaavalos.mastercake.screens.home.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -22,11 +23,12 @@ import com.angelaavalos.mastercake.screens.home.models.Category
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
 
 @Composable
-fun CategoriesItem(category: Category, url: String) {
+fun CategoriesItem(category: Category, url: String, onClick: (String) -> Unit) {
 
     MASTERCAKETheme() {
         Card(
             modifier = Modifier
+                .clickable{onClick(category._id)}
                 .width(110.dp)
                 .padding(8.dp)
                 .border(
