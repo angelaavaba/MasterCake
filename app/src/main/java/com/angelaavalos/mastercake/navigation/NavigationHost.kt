@@ -20,6 +20,7 @@ import com.angelaavalos.mastercake.screens.onboarding.OnboardingScreen
 import com.angelaavalos.mastercake.screens.register.RegisterView
 import com.angelaavalos.mastercake.screens.register.RegisterViewModel
 import com.angelaavalos.mastercake.screens.splashscreen.SplashScreen
+import com.angelaavalos.mastercake.screens.user.AboutView
 import com.angelaavalos.mastercake.screens.user.UsersView
 import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import kotlinx.coroutines.delay
@@ -27,7 +28,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 
-fun NavigationHost(navController: NavHostController, homeViewModel: HomeViewModel){
+fun NavigationHost(navController: NavHostController, homeViewModel: HomeViewModel) {
 
 
     val context = LocalContext.current
@@ -51,9 +52,7 @@ fun NavigationHost(navController: NavHostController, homeViewModel: HomeViewMode
         composable(FavoritesView.route) {
             FavoritesView(navController = navController)
         }
-        composable(NotificationsView.route) {
-            MessagesView(navController = navController)
-        }
+
         composable(CartView.route) {
             CartView(navController = navController)
         }
@@ -82,6 +81,9 @@ fun NavigationHost(navController: NavHostController, homeViewModel: HomeViewMode
             SplashScreen(navController = navController)
 
 
+        }
+        composable(AboutView.route) {
+            AboutView(navController = navController)
         }
     }
 }

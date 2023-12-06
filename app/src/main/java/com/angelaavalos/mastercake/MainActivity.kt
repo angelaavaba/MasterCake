@@ -3,10 +3,8 @@
 package com.angelaavalos.mastercake
 
 import android.annotation.SuppressLint
-
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -23,11 +21,9 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import androidx.navigation.compose.rememberNavController
 import com.angelaavalos.mastercake.navigation.NavigationHost
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
-import com.google.android.gms.auth.api.Auth
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
-import com.angelaavalos.mastercake.screens.loginregister.AuthView
 
 
 class MainActivity : AppCompatActivity() {
