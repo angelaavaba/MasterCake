@@ -34,19 +34,22 @@ import com.angelaavalos.mastercake.screens.home.views.CategoriesItem
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.screens.utils.DropDownMenuSize
 import com.angelaavalos.mastercake.security.TokenManager
-import androidx.compose.material.Text as Text1
+import androidx.compose.material.Text
+import androidx.compose.ui.text.style.TextAlign
 
 
 @Composable
 fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
 
-   val products by homeViewModel.products.observeAsState(emptyList())
+    val products by homeViewModel.products.observeAsState(emptyList())
+    val categories by homeViewModel.categories.observeAsState(emptyList())
     val context = LocalContext.current
 
     LaunchedEffect(Unit){
         val jwt = TokenManager.getToken(context)
         if(!jwt.isNullOrBlank()){
             homeViewModel.fetchProducts(jwt)
+            homeViewModel.fetchCategories(jwt)
         }else{
 
         }
@@ -54,7 +57,7 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text1(stringResource(id = R.string.Home)) }) },
+        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.Home)) }) },
         content = { it
             val selectedProduct = remember { mutableStateOf(null as Product?) }
 
@@ -66,8 +69,8 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
                         LazyRow(
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            items(homeViewModel.categories) { category ->
-                                CategoriesItem(category)
+                            items(categories) { category ->
+                                CategoriesItem(category = category, url = category.image)
                             }
                         }
                     }
@@ -130,32 +133,43 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: Strin
                     painter = image,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp) // Adjust the height of the image
+                        .clip(shape = MaterialTheme.shapes.medium)
                 )
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
-                        Text1(
-                            text = product.product,
-                            style = MaterialTheme.typography.h5,
-                        )
-                    Text1(
+                    Text(
+                        text = product.product,
+                        style = MaterialTheme.typography.h5,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Text(
                         text = product.price.toString() + "MXN",
                         style = MaterialTheme.typography.h6
                     )
-                    }
+                }
 
+                Text(
+                    text = product.description,
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                    textAlign = TextAlign.Center
+                )
 
                 DropDownMenuSize()
 
-                // Puedes agregar más elementos debajo de la descripción según sea necesario.
+                // Add more elements below the description as needed.
             }
         }
     }
 }
+
 
 
 @Composable

@@ -48,8 +48,6 @@ fun ProductsItem(product: Product, onProductClick: () -> Unit, url: String) {
                         placeholder(R.drawable.ic_launcher_background) // Imagen de carga
                     }
                 )
-
-
                 Image(
                     painter = image,
                     contentDescription = null,

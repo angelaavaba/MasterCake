@@ -1,5 +1,7 @@
 package com.angelaavalos.mastercake.screens.login
 
+import com.angelaavalos.mastercake.screens.home.models.Category
+import com.angelaavalos.mastercake.screens.home.network.CategoryService
 import com.angelaavalos.mastercake.screens.home.network.ProductService
 import com.angelaavalos.mastercake.screens.login.network.LoginService
 import com.angelaavalos.mastercake.screens.register.network.RegisterService
@@ -38,5 +40,9 @@ object RetrofitInstance {
 
     val productService: ProductService by lazy {
         retrofit.create(ProductService::class.java)
+    }
+
+    val categoryService: CategoryService by lazy {
+        retrofit.create(CategoryService::class.java)
     }
 }

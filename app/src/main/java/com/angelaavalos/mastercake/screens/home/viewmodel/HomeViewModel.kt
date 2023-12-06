@@ -1,37 +1,35 @@
 package com.angelaavalos.mastercake.screens.home.viewmodel
 
-import android.net.http.HttpException
 import android.util.Log
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.angelaavalos.mastercake.R
-import com.angelaavalos.mastercake.screens.home.models.Categories
+import com.angelaavalos.mastercake.screens.home.models.Category
 import com.angelaavalos.mastercake.screens.home.models.Product
+import com.angelaavalos.mastercake.screens.home.network.CategoryRepository
 import com.angelaavalos.mastercake.screens.home.network.ProductRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel(){
     private lateinit var jwt:String
 
-    private val repository: ProductRepository by lazy { ProductRepository(jwt) }
+    private val repositoryP: ProductRepository by lazy { ProductRepository(jwt) }
+
+    private val repositoryC: CategoryRepository by lazy { CategoryRepository(jwt) }
 
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> = _products
+
+    private val _categories = MutableLiveData<List<Category>>()
+    val categories: LiveData<List<Category>> = _categories
 
     fun fetchProducts(userJwt: String){
         this.jwt = userJwt
         viewModelScope.launch {
             try{
-                val products = repository.getProducts()
+                val products = repositoryP.getProducts()
                 _products.value = products
-                Log.d("Contador", "Product count: ${products.count()}")
-                Log.d("Contador", "Product count: ${products[0].product}")
             }catch(e: Exception){
                 Log.e("API_ERROR", "Token used: $jwt")
                 e.printStackTrace()
@@ -39,14 +37,17 @@ class HomeViewModel : ViewModel(){
         }
     }
 
-    val categories = listOf(
-        Categories(Icons.Filled.Cake, R.string.cakes),
-        Categories(Icons.Filled.Icecream,R.string.Cupcakes),
-        Categories(Icons.Filled.Cookie,R.string.cookies),
-        Categories(Icons.Filled.BakeryDining,R.string.breads),
-        Categories(Icons.Filled.Icecream,R.string.desserts)
+    fun fetchCategories(userJwt: String){
+        this.jwt = userJwt
+        viewModelScope.launch {
+            try{
+                val categories = repositoryC.getCategories()
+                _categories.value = categories
+            }catch(e: Exception){
+                Log.e("API_ERROR", "Token used: $jwt")
+                e.printStackTrace()
+            }
+        }
+    }
 
-
-
-    )
 }
