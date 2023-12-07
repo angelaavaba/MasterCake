@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.angelaavalos.mastercake.navigation.NavRoutes.*
 import com.angelaavalos.mastercake.screens.HomeView
-import com.angelaavalos.mastercake.screens.cart.CartView
+import com.angelaavalos.mastercake.screens.cart.views.CartView
 import com.angelaavalos.mastercake.screens.favorites.FavoritesView
 import com.angelaavalos.mastercake.screens.home.viewmodel.HomeViewModel
 import com.angelaavalos.mastercake.screens.loginregister.LogInRegisterView

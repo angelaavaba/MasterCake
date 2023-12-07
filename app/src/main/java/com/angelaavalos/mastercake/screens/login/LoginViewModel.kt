@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.angelaavalos.mastercake.screens.login.model.LoginDataBody
 import com.angelaavalos.mastercake.screens.login.model.LoginModel
+import com.angelaavalos.mastercake.screens.user.models.UserResponse
+import com.angelaavalos.mastercake.screens.user.network.UserRepository
 import com.angelaavalos.mastercake.security.TokenManager
 import kotlinx.coroutines.launch
 
@@ -21,6 +23,14 @@ class LoginViewModel() : ViewModel() {
     private val _loginAttempted = MutableLiveData<Boolean>()
     val loginAttempted: LiveData<Boolean> = _loginAttempted
 
+    private val userRepository = UserRepository()
+
+    private val _userResponse = MutableLiveData<UserResponse>()
+    val userResponse: LiveData<UserResponse> = _userResponse
+
+    private val _loggedInUsername = MutableLiveData<String>()
+    val loggedInUsername: LiveData<String> = _loggedInUsername
+
     fun doLogin(loginData: LoginDataBody, context: Context) {
         viewModelScope.launch {
             _loginAttempted.value = true
@@ -31,6 +41,8 @@ class LoginViewModel() : ViewModel() {
                 if (loginResponse.message == "Login exitoso" && loginResponse.jwt != null){
                     TokenManager.saveToken(context, loginResponse.jwt)
                     _isLoginSuccessful.value = true
+                    saveLoggedInUsername(loginData.usrn)
+                    getUser(loginData.usrn)
                 }else{
                     _isLoginSuccessful.value = false
                 }
@@ -39,6 +51,28 @@ class LoginViewModel() : ViewModel() {
                 _isLoginSuccessful.value = false
             }
         }
+    }
+    fun getUser(username: String) {
+        viewModelScope.launch {
+            try {
+                val userResponse = userRepository.getUser(username)
+                if (userResponse.obj != null) {
+                    _userResponse.value = userResponse
+                    val userId = userResponse.obj.id
+                    Log.d("LoginViewModel", "Fetched userId: $userId")
+                } else {
+                    Log.e("LoginViewModel", "User object is null")
+                }
+            } catch (e: Exception) {
+                Log.e("LoginViewModel", "Error fetching user data", e)
+            }
+        }
+    }
+
+
+
+    fun saveLoggedInUsername(username: String) {
+        _loggedInUsername.value = username
     }
 
 }

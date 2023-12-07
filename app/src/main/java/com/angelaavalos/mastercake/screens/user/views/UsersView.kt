@@ -156,6 +156,8 @@ fun UsersView(navController: NavController) {
                     }
 
                     Spacer(modifier = Modifier.weight(1f))
+
+
                 }
 
                 // Animación Lottie en la parte inferior
@@ -170,6 +172,8 @@ fun UsersView(navController: NavController) {
         bottomBar = { BottomNavBar(navController = navController) }
     )
 }
+
+
 
 
 

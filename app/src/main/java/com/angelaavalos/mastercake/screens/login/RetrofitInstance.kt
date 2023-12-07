@@ -5,6 +5,7 @@ import com.angelaavalos.mastercake.screens.home.network.CategoryService
 import com.angelaavalos.mastercake.screens.home.network.ProductService
 import com.angelaavalos.mastercake.screens.login.network.LoginService
 import com.angelaavalos.mastercake.screens.register.network.RegisterService
+import com.angelaavalos.mastercake.screens.user.network.UserService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -45,4 +46,9 @@ object RetrofitInstance {
     val categoryService: CategoryService by lazy {
         retrofit.create(CategoryService::class.java)
     }
+
+    val userService: UserService by lazy {
+        retrofit.create(UserService::class.java)
+    }
+
 }
