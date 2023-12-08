@@ -20,7 +20,7 @@ import com.angelaavalos.mastercake.screens.login.LoginViewModel
 
 
 @Composable
-fun CartView(navController: NavController, orderViewModel: OrderViewModel){
+fun CartView(navController: NavController){
     var userId by remember { mutableStateOf("") }
     var productId by remember { mutableStateOf("") }
     var quantity by remember { mutableStateOf("") }
@@ -64,7 +64,11 @@ fun CartView(navController: NavController, orderViewModel: OrderViewModel){
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
-                
+
+
+                Button(onClick = { }) {
+                    Text("Submit Order")
+                }
 
 
             }
@@ -72,4 +76,3 @@ fun CartView(navController: NavController, orderViewModel: OrderViewModel){
         bottomBar = { BottomNavBar(navController = navController) }
     )
 }
-
