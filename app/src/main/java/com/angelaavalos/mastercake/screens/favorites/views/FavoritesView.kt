@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 @Composable
 fun FavoritesView(navController: NavController, videoUris: List<Uri>) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Favorites") }) },
+        topBar = { TopAppBar(title = { Text("Promos") }) },
         content = {
             Column {
                 videoUris.forEach { videoUri ->

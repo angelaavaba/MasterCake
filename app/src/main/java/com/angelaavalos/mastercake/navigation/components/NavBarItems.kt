@@ -14,8 +14,8 @@ val NavBarItems = listOf(
         route = "homeroute"
     ),
     BarItem(
-        title = R.string.Favorites,
-        image = Icons.Filled.Favorite,
+        title = R.string.Promo,
+        image = Icons.Filled.Discount,
         route = "favoritesroute"
     ),
     BarItem(
