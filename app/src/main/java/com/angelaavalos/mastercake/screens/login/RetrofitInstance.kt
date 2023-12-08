@@ -1,5 +1,6 @@
 package com.angelaavalos.mastercake.screens.login
 
+import com.angelaavalos.mastercake.screens.cart.network.OrderService
 import com.angelaavalos.mastercake.screens.favorites.network.FavoriteService
 import com.angelaavalos.mastercake.screens.home.network.CategoryService
 import com.angelaavalos.mastercake.screens.home.network.ProductService
@@ -10,6 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 
 object RetrofitInstance {
@@ -55,5 +57,8 @@ object RetrofitInstance {
         retrofit.create(FavoriteService::class.java)
     }
 
+    val orderService: OrderService by lazy {
+        retrofit.create(OrderService::class.java)
+    }
 
 }
