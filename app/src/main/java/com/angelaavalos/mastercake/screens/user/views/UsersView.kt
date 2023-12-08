@@ -73,7 +73,7 @@ fun UsersView(navController: NavController) {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        "Interfaz de usuario",
+                        "User interface",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -101,7 +101,7 @@ fun UsersView(navController: NavController) {
                                         .background(Color.Green)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Text("Usuario Activo")
+                                Text("User Active")
                             }
 
                             Text(
@@ -150,7 +150,7 @@ fun UsersView(navController: NavController) {
                                     .padding(horizontal = 16.dp, vertical = 8.dp),
                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
                             ) {
-                                Text("Cerrar Sesión", color = Color.White)
+                                Text("Log Out", color = Color.White)
                             }
                         }
                     }
