@@ -10,8 +10,10 @@ import com.angelaavalos.mastercake.screens.login.model.LoginDataBody
 import com.angelaavalos.mastercake.screens.login.model.LoginModel
 import com.angelaavalos.mastercake.screens.user.models.UserResponse
 import com.angelaavalos.mastercake.screens.user.network.UserRepository
+import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import com.angelaavalos.mastercake.security.TokenManager
 import kotlinx.coroutines.launch
+
 
 class LoginViewModel() : ViewModel() {
     private val repository = LoginRepository()
@@ -31,7 +33,12 @@ class LoginViewModel() : ViewModel() {
     private val _loggedInUsername = MutableLiveData<String>()
     val loggedInUsername: LiveData<String> = _loggedInUsername
 
+
+
+
     fun doLogin(loginData: LoginDataBody, context: Context) {
+
+
         viewModelScope.launch {
             _loginAttempted.value = true
 
@@ -42,7 +49,7 @@ class LoginViewModel() : ViewModel() {
                     TokenManager.saveToken(context, loginResponse.jwt)
                     _isLoginSuccessful.value = true
                     saveLoggedInUsername(loginData.usrn)
-                    getUser(loginData.usrn)
+
                 }else{
                     _isLoginSuccessful.value = false
                 }
@@ -52,14 +59,22 @@ class LoginViewModel() : ViewModel() {
             }
         }
     }
-    fun getUser(username: String) {
+
+    private val _userId = MutableLiveData<String>()
+    val userId: LiveData<String> = _userId
+
+    fun getUser(username: String, preferenceManager: PreferenceManager) {
         viewModelScope.launch {
             try {
                 val userResponse = userRepository.getUser(username)
                 if (userResponse.obj != null) {
                     _userResponse.value = userResponse
-                    val userId = userResponse.obj.id
+                    val userId = userResponse.obj.id // Saved userId
+                    _userId.value = userId
                     Log.d("LoginViewModel", "Fetched userId: $userId")
+
+                    // Save userId in SharedPreferences
+                    preferenceManager.saveStringData("userId", userId)
                 } else {
                     Log.e("LoginViewModel", "User object is null")
                 }
