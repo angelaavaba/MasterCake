@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -36,7 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 
 
 @Composable
-fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
+fun HomeView(navController: NavController, homeViewModel: HomeViewModel) {
 
     val products by homeViewModel.products.observeAsState(emptyList())
     val categories by homeViewModel.categories.observeAsState(emptyList())
@@ -64,24 +66,27 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
             val selectedProduct = remember { mutableStateOf(null as Product?) }
 
             Column(modifier = Modifier.fillMaxSize()) {
-                LazyColumn(
-                    modifier = Modifier.weight(1f)  // Occupy most of the space
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState())// Occupy most of the space
+
                 ) {
-                    item {
-                        LazyRow(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            items(categories) { category ->
-                                CategoriesItem(category = category, url = category.image){ categoryId ->
-                                    homeViewModel.fetchProductsByCategory(categoryId)
-                                }
+                    LazyRow(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        items(categories) { category ->
+                            CategoriesItem(
+                                category = category,
+                                url = category.image
+                            ) { categoryId ->
+                                homeViewModel.fetchProductsByCategory(categoryId)
                             }
                         }
                     }
-                    items(productsToDisplay.chunked(2), key = { pair ->
-                        // Combine the IDs of the products in the pair to create a unique key
-                        pair.joinToString(separator = "-") { it._id }
-                    }) { productPair ->
+
+
+                    productsToDisplay.chunked(2).forEach { productPair ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -98,13 +103,15 @@ fun HomeView(homeViewModel: HomeViewModel, navController: NavController) {
 
                 }
 
-               /* Button(onClick = { homeViewModel.refreshAllProducts() }) {
-                    Text("Show All Products")
-                }*/
+
 
                 selectedProduct.value?.let { product ->
                     ProductDescriptionDialog(product, onDismiss = { selectedProduct.value = null }, url = product.image)
                 }
+                /*Button(onClick = { homeViewModel.refreshAllProducts() }) {
+                    Text("Show All Products")
+                }*/
+
                 BottomNavBar(navController = navController) // This should now appear at the bottom
             }
         },
@@ -175,9 +182,12 @@ fun ProductDescriptionDialog(product: Product, onDismiss: () -> Unit, url: Strin
                     textAlign = TextAlign.Center
                 )
 
-                DropDownMenuSize()
-
-                // Add more elements below the description as needed.
+                Button(onClick = { /*TODO*/ },
+                       modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(text = "Agregar al carrito")
+                }
+    
             }
         }
     }

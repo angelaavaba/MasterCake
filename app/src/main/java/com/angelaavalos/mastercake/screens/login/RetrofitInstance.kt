@@ -1,6 +1,6 @@
 package com.angelaavalos.mastercake.screens.login
 
-import com.angelaavalos.mastercake.screens.home.models.Category
+import com.angelaavalos.mastercake.screens.favorites.network.FavoriteService
 import com.angelaavalos.mastercake.screens.home.network.CategoryService
 import com.angelaavalos.mastercake.screens.home.network.ProductService
 import com.angelaavalos.mastercake.screens.login.network.LoginService
@@ -10,7 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+
 
 object RetrofitInstance {
     private const val BASE_URL = "https://kind-lime-meerkat-gear.cyclic.app/"
@@ -50,5 +50,10 @@ object RetrofitInstance {
     val userService: UserService by lazy {
         retrofit.create(UserService::class.java)
     }
+
+    val favoriteService: FavoriteService by lazy {
+        retrofit.create(FavoriteService::class.java)
+    }
+
 
 }

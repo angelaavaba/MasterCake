@@ -1,5 +1,7 @@
 package com.angelaavalos.mastercake.screens.user
 
+import android.content.Context
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,9 +31,10 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.angelaavalos.mastercake.R
 import com.angelaavalos.mastercake.navigation.NavRoutes
 import com.angelaavalos.mastercake.navigation.components.BottomNavBar
+import com.angelaavalos.mastercake.security.TokenManager
 
 @Composable
-fun UsersView(navController: NavController) {
+fun UsersView(navController: NavController, context: Context) {
     val lottieComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.pastelanimation3))
 
     Scaffold(
@@ -144,7 +147,8 @@ fun UsersView(navController: NavController) {
                             }
 
                             Button(
-                                onClick = { navController.navigate(NavRoutes.LoginRegisterView.route) },
+                                onClick = { TokenManager.clearToken(context)
+                                            navController.navigate(NavRoutes.LoginRegisterView.route) },
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = 16.dp, vertical = 8.dp),

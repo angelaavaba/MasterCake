@@ -8,6 +8,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -31,6 +34,7 @@ import com.angelaavalos.mastercake.navigation.NavRoutes
 import com.angelaavalos.mastercake.screens.login.model.LoginDataBody
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.input.VisualTransformation
 import kotlin.coroutines.coroutineContext
 
 
@@ -39,6 +43,7 @@ fun LoginView(navController: NavController, viewModel: LoginViewModel) {
 
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
     val isLoginSuccessful by viewModel.isLoginSuccessful.observeAsState()
     var showErrorDialog by remember { mutableStateOf(false) }
     val loginAttempted by viewModel.loginAttempted.observeAsState()
@@ -116,7 +121,7 @@ fun LoginView(navController: NavController, viewModel: LoginViewModel) {
                     )
 
                     Text(
-                        text = stringResource(id = R.string.Text_Email),
+                        text = "Username",
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 16.sp,
@@ -127,7 +132,6 @@ fun LoginView(navController: NavController, viewModel: LoginViewModel) {
                         TextField(
                             value = username,
                             onValueChange = { username = it },
-                            label = { Text(text = "username") },
                             textStyle = TextStyle(color = Color.White),
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -149,14 +153,18 @@ fun LoginView(navController: NavController, viewModel: LoginViewModel) {
                         TextField(
                             value = password,
                             onValueChange = { password = it },
-                            label = { Text(text = "*******") },
-                            visualTransformation = PasswordVisualTransformation(),
+                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                             textStyle = TextStyle(color = Color.White),
                             modifier = Modifier
                                 .fillMaxWidth(),
                             shape = RoundedCornerShape(10.dp),
-                            colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
-
+                            colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.secondaryVariant),
+                            trailingIcon = {
+                                val icon = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                                    Icon(imageVector = icon, contentDescription = "Toggle password visibility")
+                                }
+                            }
                         )
                     }
                     val context = LocalContext.current
