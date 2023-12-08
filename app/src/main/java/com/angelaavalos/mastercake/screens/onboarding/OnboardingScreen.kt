@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -36,8 +35,6 @@ import com.angelaavalos.mastercake.navigation.NavRoutes
 import com.angelaavalos.mastercake.screens.utils.PreferenceManager
 import kotlinx.coroutines.launch
 import com.angelaavalos.mastercake.ui.theme.MASTERCAKETheme
-
-
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -149,7 +146,10 @@ fun OnboardingScreen(navController: NavController){
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(16.dp),
-                    colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
+                    colors = ButtonDefaults.elevatedButtonColors(
+                        containerColor = Color.White,
+                        contentColor = Color.Black
+                    )
                 ) {
                     Text(text = stringResource(id = R.string.button_next))
 
@@ -165,7 +165,10 @@ fun OnboardingScreen(navController: NavController){
                         modifier = Modifier
                             .align(Alignment.BottomStart)
                             .padding(16.dp),
-                        colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
+                        colors = ButtonDefaults.elevatedButtonColors(
+                            containerColor = Color.White,
+                            contentColor = Color.Black
+                        )
 
                     ) {
                         Text(text = stringResource(id = R.string.button_skip))
@@ -181,7 +184,10 @@ fun OnboardingScreen(navController: NavController){
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(bottom = 50.dp),
-                    colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.White, contentColor = Color.Black)
+                    colors = ButtonDefaults.elevatedButtonColors(
+                        containerColor = Color.White,
+                        contentColor = Color.Black
+                    )
                 ) {
                     Text(text = stringResource(id = R.string.button_begin))
 
