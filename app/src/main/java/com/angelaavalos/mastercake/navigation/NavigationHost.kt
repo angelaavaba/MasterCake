@@ -62,7 +62,8 @@ fun NavigationHost(navController: NavHostController, homeViewModel: HomeViewMode
             FavoritesView(navController = navController, videoUris = videoUris)
         }
         composable(CartView.route) {
-            CartView(navController = navController)
+            CartView(navController = navController
+            )
         }
 
         composable(Register.route) {
